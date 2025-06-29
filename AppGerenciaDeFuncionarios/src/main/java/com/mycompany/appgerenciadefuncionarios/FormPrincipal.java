@@ -4,8 +4,10 @@
  */
 package com.mycompany.appgerenciadefuncionarios;
 
-import frames.Funcionario;
-import java.awt.Color;
+import frames.ConsultaFun;
+import frames.AddFun;
+import frames.AlterarFun;
+import java.awt.Font;
 
 /**
  *
@@ -22,6 +24,13 @@ public class FormPrincipal extends javax.swing.JFrame {
         initComponents();
         setSize(1099, 650);
         setLocationRelativeTo(null);
+        setJMenuBar(null);
+        
+        buttonRemoverFun.setFont(new Font("Arial", Font.BOLD, 15));
+        buttonAlterarFun.setFont(new Font("Arial", Font.BOLD, 15));
+        buttonConsultarFun.setFont(new Font("Arial", Font.BOLD, 15));
+        buttonAddFun.setFont(new Font("Arial", Font.BOLD, 15));
+
     }
 
     /**
@@ -34,6 +43,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        buttonRemoverFun = new javax.swing.JButton();
+        buttonAddFun = new javax.swing.JButton();
+        buttonAlterarFun = new javax.swing.JButton();
+        buttonConsultarFun = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         AddNovoFuncionario = new javax.swing.JMenuItem();
@@ -43,15 +56,78 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         desktopPane.setPreferredSize(new java.awt.Dimension(1024, 541));
 
+        buttonRemoverFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/funcionarios.png"))); // NOI18N
+        buttonRemoverFun.setText("Remover funcionário");
+        buttonRemoverFun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonRemoverFun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonRemoverFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRemoverFunActionPerformed(evt);
+            }
+        });
+
+        buttonAddFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/adicionar-funcionario.png"))); // NOI18N
+        buttonAddFun.setText("Adicionar funcionário");
+        buttonAddFun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonAddFun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonAddFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAddFunActionPerformed(evt);
+            }
+        });
+
+        buttonAlterarFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/rotatividade-de-funcionarios.png"))); // NOI18N
+        buttonAlterarFun.setText("Alterar funcionário");
+        buttonAlterarFun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonAlterarFun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonAlterarFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlterarFunActionPerformed(evt);
+            }
+        });
+
+        buttonConsultarFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/planing.png"))); // NOI18N
+        buttonConsultarFun.setText("Consultar funcionário");
+        buttonConsultarFun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonConsultarFun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonConsultarFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConsultarFunActionPerformed(evt);
+            }
+        });
+
+        desktopPane.setLayer(buttonRemoverFun, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPane.setLayer(buttonAddFun, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPane.setLayer(buttonAlterarFun, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktopPane.setLayer(buttonConsultarFun, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1170, Short.MAX_VALUE)
+            .addGroup(desktopPaneLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonRemoverFun, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(desktopPaneLayout.createSequentialGroup()
+                        .addComponent(buttonAddFun, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(buttonAlterarFun, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
+                .addComponent(buttonConsultarFun, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGroup(desktopPaneLayout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonAlterarFun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAddFun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonConsultarFun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(buttonRemoverFun, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
         );
 
         jMenuBar1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -98,17 +174,41 @@ public class FormPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddNovoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNovoFuncionarioActionPerformed
-        Funcionario fun = new Funcionario();
-        desktopPane.add(fun);
-        fun.setSize(desktopPane.getSize());
-        fun.setLocation(0, 0);
-        fun.show();
+        
 
     }//GEN-LAST:event_AddNovoFuncionarioActionPerformed
 
     private void jMenuBar1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jMenuBar1AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuBar1AncestorAdded
+
+    private void buttonConsultarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultarFunActionPerformed
+        ConsultaFun consultaFun = new ConsultaFun();
+        desktopPane.add(consultaFun);
+        consultaFun.setSize(desktopPane.getSize());
+        consultaFun.setLocation(0, 0);
+        consultaFun.show();
+    }//GEN-LAST:event_buttonConsultarFunActionPerformed
+
+    private void buttonAlterarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarFunActionPerformed
+        AlterarFun alterarFun = new AlterarFun();
+        desktopPane.add(alterarFun);
+        alterarFun.setSize(desktopPane.getSize());
+        alterarFun.setLocation(0, 0);
+        alterarFun.show();
+    }//GEN-LAST:event_buttonAlterarFunActionPerformed
+
+    private void buttonAddFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddFunActionPerformed
+        AddFun fun = new AddFun();
+        desktopPane.add(fun);
+        fun.setSize(desktopPane.getSize());
+        fun.setLocation(0, 0);
+        fun.show();
+    }//GEN-LAST:event_buttonAddFunActionPerformed
+
+    private void buttonRemoverFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverFunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRemoverFunActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +237,10 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AddNovoFuncionario;
+    private javax.swing.JButton buttonAddFun;
+    private javax.swing.JButton buttonAlterarFun;
+    private javax.swing.JButton buttonConsultarFun;
+    private javax.swing.JButton buttonRemoverFun;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

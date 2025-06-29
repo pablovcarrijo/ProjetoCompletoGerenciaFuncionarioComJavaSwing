@@ -16,14 +16,46 @@ public class Funcionario {
     private String dadoEstadoCivil;
     private Double salario;
     private String cargo;    
+    private DadosBancarios dadosBancarios;
+    private Endereco endereco;
+    private Contato contato;
     
-    public Funcionario(String dadoName, String dadoNacionalidade, String dadoRg, String dadoEstadoCivil, Double salario, String cargo) {
+    public Funcionario(String dadoName, String dadoNacionalidade, String dadoRg,
+                       String dadoEstadoCivil, Double salario, String cargo,
+                       DadosBancarios dadosBancarios, Endereco endereco, Contato contato) {
         this.dadoName = dadoName;
         this.dadoNacionalidade = dadoNacionalidade;
         this.dadoRg = dadoRg;
         this.dadoEstadoCivil = dadoEstadoCivil;
         this.salario = salario;
         this.cargo = cargo;
+        this.dadosBancarios = dadosBancarios;
+        this.endereco = endereco;
+        this.contato = contato;
+    }
+
+    public DadosBancarios getDadosBancarios() {
+        return dadosBancarios;
+    }
+
+    public void setDadosBancarios(DadosBancarios dadosBancarios) {
+        this.dadosBancarios = dadosBancarios;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
     }
 
     public String getDadoName() {
