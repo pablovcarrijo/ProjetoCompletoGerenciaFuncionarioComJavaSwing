@@ -44,7 +44,7 @@
                           <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="161" max="-2" attributes="0"/>
+                              <Component id="textNamePesquisaAltera" min="-2" pref="161" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" pref="141" max="-2" attributes="0"/>
@@ -65,7 +65,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="textNamePesquisaAltera" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jButton2" pref="57" max="32767" attributes="0"/>
                   </Group>
@@ -81,7 +81,7 @@
             <Property name="text" type="java.lang.String" value="Nome do funcionario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="textNamePesquisaAltera">
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>

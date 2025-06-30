@@ -4,6 +4,12 @@
  */
 package frames;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import model.connector.myConnection;
+
 /**
  *
  * @author PabloCarrijo
@@ -13,10 +19,21 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
     /**
      * Creates new form AlterarFunPane
      */
-    public AlterarFunPane() {
+    private AlterarFunPaneEndereco desktopPaneEndereco;
+    private AlterarFunPaneDadosBancarios desktopPaneDadosBancarios;
+    private AlterarFunContato desktopPaneContato;
+    
+    private String nameConsulta;
+    
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
+    
+    public AlterarFunPane(String nameConsulta) {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        this.nameConsulta = nameConsulta;
     }
 
     /**
@@ -34,6 +51,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        desktopPaneAlterar = new javax.swing.JDesktopPane();
 
         jLabel1.setText("Alterar : ");
 
@@ -45,8 +63,18 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Dados pessoais");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Formas de contato");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Dados bancários");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +82,17 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout desktopPaneAlterarLayout = new javax.swing.GroupLayout(desktopPaneAlterar);
+        desktopPaneAlterar.setLayout(desktopPaneAlterarLayout);
+        desktopPaneAlterarLayout.setHorizontalGroup(
+            desktopPaneAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        desktopPaneAlterarLayout.setVerticalGroup(
+            desktopPaneAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 429, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,18 +110,20 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jButton3)
                 .addContainerGap(320, Short.MAX_VALUE))
+            .addComponent(desktopPaneAlterar)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(desktopPaneAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -100,15 +141,77 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        desktopPaneEndereco = new AlterarFunPaneEndereco(nameConsulta);
+        desktopPaneAlterar.add(desktopPaneEndereco);
+        desktopPaneEndereco.setSize(desktopPaneAlterar.getSize());
+        desktopPaneEndereco.setLocation(0, 0);
+        desktopPaneEndereco.show();
+        
+        try{
+            if(conn == null || conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            else System.out.println("A conexão deu errado....");
+            
+            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
+            
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, nameConsulta);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                desktopPaneEndereco.setTextFieldAlterarCEP(rs.getString("cep"));
+                desktopPaneEndereco.setTextFieldAlterarBairro(rs.getString("bairro"));
+                desktopPaneEndereco.setTextFieldAlterarCidade(rs.getString("cidade"));
+                desktopPaneEndereco.setTextFieldAlterarComplemento(rs.getString("complemento"));
+                desktopPaneEndereco.setTextFieldAlterarNumero(rs.getString("numero"));
+                desktopPaneEndereco.setTextFieldAlterarRua(rs.getString("rua"));
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.println("ERRO AO CONECTAR! " + e.getMessage());
+        }
+        finally{
+            myConnection.closeConnection(conn, ps);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        
+        desktopPaneDadosBancarios = new AlterarFunPaneDadosBancarios();
+        desktopPaneAlterar.add(desktopPaneDadosBancarios);
+        desktopPaneDadosBancarios.setSize(desktopPaneAlterar.getSize());
+        desktopPaneDadosBancarios.setLocation(0, 0);
+        desktopPaneDadosBancarios.show();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        AlterarFunPaneDadosPessoais desktopPaneDadosPesosas = new AlterarFunPaneDadosPessoais();
+        desktopPaneAlterar.add(desktopPaneDadosPesosas);
+        desktopPaneDadosPesosas.setSize(desktopPaneAlterar.getSize());
+        desktopPaneDadosPesosas.setLocation(0, 0);
+        desktopPaneDadosPesosas.show();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        desktopPaneContato = new AlterarFunContato();
+        desktopPaneAlterar.add(desktopPaneContato);
+        desktopPaneContato.setSize(desktopPaneAlterar.getSize());
+        desktopPaneContato.setLocation(0, 0);
+        desktopPaneContato.show();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane desktopPaneAlterar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

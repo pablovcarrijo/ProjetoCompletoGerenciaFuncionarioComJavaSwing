@@ -13,6 +13,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
     /**
      * Creates new form AlterarFun
      */
+    public AlterarFunPane alterarPane;
     public AlterarFun() {
         initComponents();
         this.setBorder(null);
@@ -30,7 +31,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textNamePesquisaAltera = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         desktopPaneAlterar = new javax.swing.JDesktopPane();
         jButton2 = new javax.swing.JButton();
@@ -76,7 +77,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
                         .addGap(110, 110, 110)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textNamePesquisaAltera, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(654, Short.MAX_VALUE))
@@ -92,7 +93,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textNamePesquisaAltera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(desktopPaneAlterar))
@@ -117,7 +118,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AlterarFunPane alterarPane = new AlterarFunPane();
+        alterarPane = new AlterarFunPane(textNamePesquisaAltera.getText());
         
         desktopPaneAlterar.add(alterarPane);
         alterarPane.setSize(desktopPaneAlterar.getSize());
@@ -132,6 +133,6 @@ public class AlterarFun extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField textNamePesquisaAltera;
     // End of variables declaration//GEN-END:variables
 }
