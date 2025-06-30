@@ -7,6 +7,7 @@ package com.mycompany.appgerenciadefuncionarios;
 import frames.ConsultaFun;
 import frames.AddFun;
 import frames.AlterarFun;
+import frames.RemoverFun;
 import java.awt.Font;
 
 /**
@@ -207,7 +208,11 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddFunActionPerformed
 
     private void buttonRemoverFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverFunActionPerformed
-        // TODO add your handling code here:
+        RemoverFun removerFun = new RemoverFun();
+        desktopPane.add(removerFun);
+        removerFun.setSize(desktopPane.getSize());
+        removerFun.setLocation(0, 0);
+        removerFun.show();
     }//GEN-LAST:event_buttonRemoverFunActionPerformed
 
     /**
