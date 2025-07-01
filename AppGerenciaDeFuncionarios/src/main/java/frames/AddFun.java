@@ -60,7 +60,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         
         comboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
-            "Soleiro(a)",
+            "Solteiro(a)",
             "Casado(a)",
             "Viúvo(a)",
             "Divorciado(a)",
@@ -196,7 +196,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         jLabel6.setText("Número");
 
         cadastroDataNascimentoLabel.setForeground(new java.awt.Color(255, 255, 255));
-        cadastroDataNascimentoLabel.setText("Data de nasimento");
+        cadastroDataNascimentoLabel.setText("Data de nascimento");
         cadastroDataNascimentoLabel.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 cadastroDataNascimentoLabelAncestorAdded(evt);
@@ -373,11 +373,8 @@ public class AddFun extends javax.swing.JInternalFrame {
                                         .addGap(42, 42, 42)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(comboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6)
-                                                    .addComponent(textFieldNumeroFun, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(119, 119, 119))
+                                            .addComponent(jLabel6)
+                                            .addComponent(textFieldNumeroFun, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(cadastroCargoEmpresarialLabel)))))
                             .addComponent(cadastroEnderecoLabel)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -435,11 +432,9 @@ public class AddFun extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cadastroDataNascimentoLabel)
-                            .addComponent(cadastroCargoEmpresarialLabel))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cadastroDataNascimentoLabel)
+                        .addComponent(cadastroCargoEmpresarialLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textFieldNomeCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

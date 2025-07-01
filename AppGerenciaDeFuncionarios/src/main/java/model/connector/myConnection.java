@@ -43,10 +43,9 @@ public class myConnection {
         try {
             if (con != null) {
                 con.close();
-                JOptionPane.showMessageDialog(null, "Conexão com o banco de dados fechada.");
             }
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão com o banco de dados!\n" + erro.getMessage(), "Erro ao Fechar Conexão", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Erro ao fechar a conexão com o banco de dados!");
         }
     }
 
@@ -58,7 +57,7 @@ public class myConnection {
                 System.out.println("Statement fechado.");
             }
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar o PreparedStatement!\n" + erro.getMessage(), "Erro ao Fechar Statement", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Erro ao fechar o PreparedStatement!");
         }
     }
 
@@ -70,7 +69,7 @@ public class myConnection {
                 System.out.println("ResultSet fechado.");
             }
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar o ResultSet!\n" + erro.getMessage(), "Erro ao Fechar ResultSet", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Erro ao fechar o ResultSet!");
         }
     }
 

@@ -4,6 +4,13 @@
  */
 package frames;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import model.connector.myConnection;
+
 /**
  *
  * @author PabloCarrijo
@@ -13,10 +20,16 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form AlterarFunPaneDadosBancarios
      */
-    public AlterarFunPaneDadosBancarios() {
+    
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private String nameConsulta;
+    
+    public AlterarFunPaneDadosBancarios(String nameConsulta) {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        this.nameConsulta = nameConsulta;
     }
 
     /**
@@ -64,6 +77,11 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
         jLabel6.setText("CPF titular :");
 
         jButton1.setText("Alterar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Agência :");
@@ -145,6 +163,99 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldAlterarSalarioActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        try{
+            
+            if(conn == null || conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            else if(conn != null || !conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            
+            String SQL = "UPDATE funcionarios SET "
+                    + "nome_banco = ?, salario = ?, agencia = ?, tipo_conta = ?, nome_titular = ?, "
+                    + "cpf_titular = ? "
+                    + "WHERE nome = ?";
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setString(1, textFieldAlterarNomeBanco.getText());
+            ps.setString(2, textFieldAlterarSalario.getText());
+            ps.setString(3, textFieldAlterarAgencia.getText());
+            ps.setString(4, textFieldAlterarTipoConta.getText());
+            ps.setString(5, textFieldAlterarNomeTitular.getText());
+            ps.setString(6, textFieldAlterarCPFTitular.getText());
+            ps.setString(7, nameConsulta);
+            
+            int n = ps.executeUpdate();
+            
+            if(n > 0){
+                JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário");
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.println("Erro ao conectar banco de dados " + e.getMessage());
+        }
+        finally{
+            myConnection.closeConnection(conn, ps);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public JTextField getTextFieldAlterarAgencia() {
+        return textFieldAlterarAgencia;
+    }
+
+    public void setTextFieldAlterarAgencia(String value) {
+        textFieldAlterarAgencia.setText(value);
+    }
+
+    public JTextField getTextFieldAlterarCPFTitular() {
+        return textFieldAlterarCPFTitular;
+    }
+
+    public void setTextFieldAlterarCPFTitular(String value) {
+        textFieldAlterarCPFTitular.setText(value);
+    }
+
+    public JTextField getTextFieldAlterarNomeBanco() {
+        return textFieldAlterarNomeBanco;
+    }
+
+    public void setTextFieldAlterarNomeBanco(String value) {
+        textFieldAlterarNomeBanco.setText(value);
+    }
+
+    public JTextField getTextFieldAlterarNomeTitular() {
+        return textFieldAlterarNomeTitular;
+    }
+
+    public void setTextFieldAlterarNomeTitular(String value) {
+        textFieldAlterarNomeTitular.setText(value);
+    }
+
+    public JTextField getTextFieldAlterarSalario() {
+        return textFieldAlterarSalario;
+    }
+
+    public void setTextFieldAlterarSalario(String value) {
+        textFieldAlterarSalario.setText(value);
+    }
+
+    public JTextField getTextFieldAlterarTipoConta() {
+        return textFieldAlterarTipoConta;
+    }
+
+    public void setTextFieldAlterarTipoConta(String value) {
+        textFieldAlterarTipoConta.setText(value);
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

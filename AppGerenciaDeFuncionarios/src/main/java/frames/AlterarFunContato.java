@@ -4,6 +4,13 @@
  */
 package frames;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import model.connector.myConnection;
+
 /**
  *
  * @author PabloCarrijo
@@ -13,10 +20,15 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
     /**
      * Creates new form AlterarFunContato
      */
-    public AlterarFunContato() {
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private String nameConsulta;    
+    
+    public AlterarFunContato(String nameConsulta) {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        this.nameConsulta = nameConsulta;
     }
 
     /**
@@ -41,6 +53,11 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
         jLabel2.setText("Telefone :");
 
         jButton1.setText("Alterar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         textFieldAlterarEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +108,64 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldAlterarEmailActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        try{
+            
+            if(conn == null || conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            else if(conn != null || !conn.isClosed()){
+                myConnection.closeConnection(conn, ps);
+                conn = myConnection.getConexao();
+            }
+            
+            String SQL = "UPDATE funcionarios SET "
+                    + "email = ?, telefone = ? "
+                    + "WHERE nome = ?";
+            
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setString(1, textFieldAlterarEmail.getText());
+            ps.setString(2, textFieldAlterarTelefone.getText());
+            ps.setString(3, nameConsulta);
+            
+            int n = ps.executeUpdate();
+            
+            if(n > 0){
+                JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário");
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.println("Erro ao conectar com o banco " + e.getMessage());
+        }
+        finally{
+            myConnection.closeConnection(conn, ps);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public JTextField getTextFieldAlterarEmail() {
+        return textFieldAlterarEmail;
+    }
+
+    public void setTextFieldAlterarEmail(String value) {
+        textFieldAlterarEmail.setText(value);
+    }
+
+    public JTextField getTextFieldAlterarTelefone() {
+        return textFieldAlterarTelefone;
+    }
+
+    public void setTextFieldAlterarTelefone(String value) {
+        textFieldAlterarTelefone.setText(value);
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

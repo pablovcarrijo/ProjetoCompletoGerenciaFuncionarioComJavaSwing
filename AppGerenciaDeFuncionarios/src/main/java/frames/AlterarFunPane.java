@@ -191,11 +191,46 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
-        desktopPaneDadosBancarios = new AlterarFunPaneDadosBancarios();
+        desktopPaneDadosBancarios = new AlterarFunPaneDadosBancarios(nameConsulta);
         desktopPaneAlterar.add(desktopPaneDadosBancarios);
         desktopPaneDadosBancarios.setSize(desktopPaneAlterar.getSize());
         desktopPaneDadosBancarios.setLocation(0, 0);
         desktopPaneDadosBancarios.show();
+        
+        try{
+            
+            if(conn == null || conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            else if(conn != null || ! conn.isClosed()){
+                myConnection.closeConnection(conn, ps);
+                conn = myConnection.getConexao();
+            }
+            
+            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
+            
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, nameConsulta);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                desktopPaneDadosBancarios.setTextFieldAlterarAgencia(rs.getString("agencia"));
+                desktopPaneDadosBancarios.setTextFieldAlterarCPFTitular(rs.getString("cpf_titular"));
+                desktopPaneDadosBancarios.setTextFieldAlterarNomeBanco(rs.getString("nome_banco"));
+                desktopPaneDadosBancarios.setTextFieldAlterarNomeTitular(rs.getString("nome_titular"));
+                desktopPaneDadosBancarios.setTextFieldAlterarSalario(rs.getString("salario"));
+                desktopPaneDadosBancarios.setTextFieldAlterarTipoConta(rs.getString("tipo_conta"));
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Erro ao conectar banco de dados");
+        }
+        finally{
+            myConnection.closeConnection(conn, ps);
+        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -253,11 +288,41 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        desktopPaneContato = new AlterarFunContato();
+        desktopPaneContato = new AlterarFunContato(nameConsulta);
         desktopPaneAlterar.add(desktopPaneContato);
         desktopPaneContato.setSize(desktopPaneAlterar.getSize());
         desktopPaneContato.setLocation(0, 0);
         desktopPaneContato.show();
+        
+        try{
+            if(conn == null || conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            else if(conn != null || !conn.isClosed()){
+                myConnection.closeConnection(conn, ps);
+                conn = myConnection.getConexao();
+            }
+            
+            String SQL = "SELECT * FROM funcionarios WHERE nome = ?";
+            
+            ps = conn.prepareStatement(SQL);
+            
+            ps.setString(1, nameConsulta);
+            
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                desktopPaneContato.setTextFieldAlterarEmail(rs.getString("email"));
+                desktopPaneContato.setTextFieldAlterarTelefone(rs.getString("telefone"));            
+                
+            }
+        }   
+        catch(SQLException e){
+            System.out.println("Erro ao estabelecer conexao com o banco " + e.getMessage());
+        }
+        finally{
+            myConnection.closeConnection(conn, ps);
+        }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 

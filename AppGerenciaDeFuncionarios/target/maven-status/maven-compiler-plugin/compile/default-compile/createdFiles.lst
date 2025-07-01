@@ -15,6 +15,7 @@ frames\RemoverFun$2.class
 model\connector\myConnection.class
 model\entities\DadosBancarios.class
 frames\AddFun$3.class
+frames\AlterarFunContato$2.class
 frames\AlterarFunPaneEndereco$2.class
 frames\AddFun$7.class
 frames\AddFun$11.class
@@ -23,6 +24,7 @@ frames\AlterarFunPaneDadosBancarios$1.class
 frames\ConsultaFunPane.class
 frames\AddFun$4.class
 frames\RemoverFun$1.class
+frames\AlterarFunPaneDadosBancarios$3.class
 frames\AddFun$12.class
 frames\AddFun$1.class
 frames\AddFun.class
