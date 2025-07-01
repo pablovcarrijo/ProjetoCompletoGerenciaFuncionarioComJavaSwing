@@ -67,7 +67,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        buttonAddFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/adicionar-funcionario.png"))); // NOI18N
+        buttonAddFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/add.png"))); // NOI18N
         buttonAddFun.setText("Adicionar funcionário");
         buttonAddFun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonAddFun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -77,7 +77,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        buttonAlterarFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/rotatividade-de-funcionarios.png"))); // NOI18N
+        buttonAlterarFun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/basket_put.png"))); // NOI18N
         buttonAlterarFun.setText("Alterar funcionário");
         buttonAlterarFun.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonAlterarFun.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -116,12 +116,12 @@ public class FormPrincipal extends javax.swing.JFrame {
                         .addComponent(buttonAlterarFun, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addComponent(buttonConsultarFun, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(desktopPaneLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonAlterarFun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonAddFun, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)

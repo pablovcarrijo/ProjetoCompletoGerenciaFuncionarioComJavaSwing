@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import model.connector.myConnection;
 
 /**
@@ -22,6 +24,9 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
     private AlterarFunPaneEndereco desktopPaneEndereco;
     private AlterarFunPaneDadosBancarios desktopPaneDadosBancarios;
     private AlterarFunContato desktopPaneContato;
+    private AlterarFunPaneDadosPessoais desktopPaneDadosPesosas;
+    
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
     private String nameConsulta;
     
@@ -151,7 +156,11 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             if(conn == null || conn.isClosed()){
                 conn = myConnection.getConexao();
             }
-            else System.out.println("A conexão deu errado....");
+            else{
+                myConnection.closeConnection(conn, ps);
+                conn = myConnection.getConexao();
+                System.out.println("A conexão havia dado errado, mas já reestabeleceu");
+            }
             
             String sql = "SELECT * FROM funcionarios WHERE nome = ?";
             
@@ -191,11 +200,54 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        AlterarFunPaneDadosPessoais desktopPaneDadosPesosas = new AlterarFunPaneDadosPessoais();
+        desktopPaneDadosPesosas = new AlterarFunPaneDadosPessoais(nameConsulta);
         desktopPaneAlterar.add(desktopPaneDadosPesosas);
         desktopPaneDadosPesosas.setSize(desktopPaneAlterar.getSize());
         desktopPaneDadosPesosas.setLocation(0, 0);
         desktopPaneDadosPesosas.show();
+        
+        try{
+            if(conn == null || conn.isClosed()){
+                conn = myConnection.getConexao();
+            }
+            else{
+                myConnection.closeConnection(conn, ps);
+                conn = myConnection.getConexao();
+                System.out.println("Erro ao conectar, mas conexao já foi reestabelecida");
+            }
+            
+            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
+
+            
+            ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, nameConsulta);
+            
+            rs = ps.executeQuery();
+            
+            
+            while(rs.next()){
+                desktopPaneDadosPesosas.setTextFieldAlterarCPF(rs.getString("cpf"));
+                
+                String dataString = rs.getString("data_nascimento");
+                LocalDate dataNascimento = LocalDate.parse(dataString);
+                
+                String dataFormatada = dataNascimento.format(dtf);
+                
+                desktopPaneDadosPesosas.setTextFieldAlterarDataNascimento(dataFormatada);
+                desktopPaneDadosPesosas.setComboBoxEstadoCivil(rs.getString("estado_civil"));
+                desktopPaneDadosPesosas.setTextFieldAlterarNacionalidade(rs.getString("nacionalidade"));
+                desktopPaneDadosPesosas.setTextFieldAlterarNome(rs.getString("nome"));
+                desktopPaneDadosPesosas.setTextFieldAlterarRG(rs.getString("rg"));
+            }
+            
+        }
+        catch(SQLException e){
+            System.out.println("Erro ao conectar...");
+        }
+        finally{
+            myConnection.closeConnection(conn, ps);
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

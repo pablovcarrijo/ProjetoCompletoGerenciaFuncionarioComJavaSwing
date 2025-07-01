@@ -128,7 +128,7 @@
         <Component class="javax.swing.JButton" name="buttonAddFun">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/mycompany/appGerenciaFuncionarios/imagens/adicionar-funcionario.png"/>
+              <Image iconType="3" name="/com/mycompany/appGerenciaFuncionarios/imagens/add.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Adicionar funcion&#xe1;rio"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -141,7 +141,7 @@
         <Component class="javax.swing.JButton" name="buttonAlterarFun">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/mycompany/appGerenciaFuncionarios/imagens/rotatividade-de-funcionarios.png"/>
+              <Image iconType="3" name="/com/mycompany/appGerenciaFuncionarios/imagens/basket_put.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Alterar funcion&#xe1;rio"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
