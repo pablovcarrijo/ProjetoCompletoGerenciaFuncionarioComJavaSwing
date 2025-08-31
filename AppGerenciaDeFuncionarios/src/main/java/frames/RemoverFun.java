@@ -19,12 +19,11 @@ public class RemoverFun extends javax.swing.JInternalFrame {
     /**
      * Creates new form RemoverFun
      */
-    
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     RemoveFunPane removeFunPane;
-    
+
     public RemoverFun() {
         initComponents();
         this.setBorder(null);
@@ -149,59 +148,87 @@ public class RemoverFun extends javax.swing.JInternalFrame {
         removeFunPane.setSize(desktopPaneRemove.getSize());
         removeFunPane.setLocation(0, 0);
         removeFunPane.show();
-        
-        try{
-         
+
+        try {
+
             conn = myConnection.getConexao();
-            if(conn == null || conn.isClosed()){
+            if (conn == null || conn.isClosed()) {
                 System.out.println("Impossivel estabelecer conexao...");
+            } else {
+                System.out.println("Conexao estabelecida com sucesso...");
             }
-            else System.out.println("Conexao estabelecida com sucesso...");
-            
+
             String nameConsulta = textFieldUsuarioDemitir.getText();
-            
-            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
-            
-            ps = conn.prepareStatement(sql);
-            
+
+            //DADOS PESSOAIS E OS IDs
+            String sqlFuncionarioDados = "SELECT * FROM funcionario WHERE nome = ?";
+            ps = conn.prepareStatement(sqlFuncionarioDados);
             ps.setString(1, nameConsulta);
-            
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            int idEndereco = -1;
+            int idFuncionario = -1;
+            int idDadosBancarios = -1;
+
+            if (rs.next()) {
+                idEndereco = Integer.parseInt(rs.getString("id_endereco"));
+                idFuncionario = Integer.parseInt(rs.getString("id_funcionario"));
+                idDadosBancarios = Integer.parseInt(rs.getString("numero_conta_bancaria"));
+
                 removeFunPane.setLabelNameInput(rs.getString("nome"));
                 removeFunPane.setLabelCPFInput(rs.getString("cpf"));
-                removeFunPane.setLabelRGInput(rs.getString("rg"));
-                removeFunPane.setLabelNacionalidadeInput(rs.getString("nacionalidade"));
                 removeFunPane.setLabelDataNascimentoInput(rs.getString("data_nascimento"));
                 removeFunPane.setLabelEstadoCivilInput(rs.getString("estado_civil"));
                 removeFunPane.setLabelCargoEmpresarialInput(rs.getString("cargo"));
+            }
+
+            // ENDERECO
+            String sqlEndereco = "SELECT * FROM endereco WHERE id_endereco = ?";
+            ps = conn.prepareStatement(sqlEndereco);
+            ps.setInt(1, idEndereco);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
                 removeFunPane.setLabelCEPInput(rs.getString("cep"));
                 removeFunPane.setLabelCidadeInput(rs.getString("cidade"));
                 removeFunPane.setLabelBairroInput(rs.getString("bairro"));
                 removeFunPane.setLabelRuaInput(rs.getString("rua"));
                 removeFunPane.setLabelNumeroEnderecoInput(rs.getString("numero"));
                 removeFunPane.setLabelComplementoEnderecoInput(rs.getString("complemento"));
+            }
+
+            // CONTATO
+            String sqlContato = "SELECT * FROM contato WHERE id_funcionario = ?";
+            ps = conn.prepareStatement(sqlContato);
+            ps.setInt(1, idFuncionario);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
                 removeFunPane.setLabelTelefoneInput(rs.getString("telefone"));
                 removeFunPane.setLabelEmailInput(rs.getString("email"));
-                removeFunPane.setLabelNomeBancoInput(rs.getString("nome_banco"));
-                removeFunPane.setLabelSalarioInput(rs.getString("salario"));
-                removeFunPane.setLabelAgenciaInput(rs.getString("agencia"));
-                removeFunPane.setLabelTipoContaInput(rs.getString("tipo_conta"));
-                removeFunPane.setLabelNomeTitularInput(rs.getString("nome_titular"));
-                removeFunPane.setLabelCPFTitularInput(rs.getString("cpf_titular"));
             }
-            
+
+            // DADOS BANCÁRIOS
+            String sqlDadosBancarios = "SELECT * FROM dados_bancarios WHERE numero_conta = ?";
+            ps = conn.prepareStatement(sqlDadosBancarios);
+            ps.setInt(1, idDadosBancarios);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                removeFunPane.setLabelNumeroContaInput(rs.getString("numero_conta"));
+                removeFunPane.setLabelNomeBancoInput(rs.getString("nome_banco"));
+                removeFunPane.setLabelAgenciaInput(rs.getString("agencia"));
+                removeFunPane.setLabelSalarioInput(rs.getString("salario"));
+            }
+
             textFieldUsuarioDemitir.setText("");
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro com banco de dados" + e.getMessage());
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -49,6 +49,15 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
             "União estável"
         }));
         
+        comboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
+            "Gerente geral",
+            "Subgerente",
+            "Supervisor da loja",
+            "Auxiliar administrativo",
+            "Financeiro/Contador",
+            "Analista de compras"
+        }));
+        
     }
 
     /**
@@ -64,15 +73,13 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         textFieldAlterarCPF = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        textFieldAlterarRG = new javax.swing.JTextField();
         textFieldAlterarDataNascimento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textFieldAlterarNacionalidade = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         comboBoxEstadoCivil = new javax.swing.JComboBox<>();
+        comboBoxCargo = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         textFieldAlterarNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,14 +93,8 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("CPF :");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("RG :");
-
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Data de nascimento :");
-
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Nacionalidade :");
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Estado civil :");
@@ -107,27 +108,35 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
 
         comboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        comboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCargoActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Cargo empresarial: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textFieldAlterarRG)
                     .addComponent(textFieldAlterarNome)
                     .addComponent(textFieldAlterarCPF)
                     .addComponent(textFieldAlterarDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(textFieldAlterarNacionalidade, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(comboBoxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(comboBoxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboBoxCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(399, 399, 399))
@@ -145,26 +154,22 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
                     .addComponent(textFieldAlterarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(textFieldAlterarRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                            .addComponent(textFieldAlterarDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldAlterarNacionalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldAlterarDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(comboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(259, Short.MAX_VALUE))
+                            .addComponent(jLabel6)
+                            .addComponent(comboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(comboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,30 +188,30 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
             else{
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
-                System.out.println("Erro de conexao, mas já foi reestabelecida");
             }
             
-            String sql = "UPDATE funcionarios SET "
-                    + "nome = ?, cpf = ?, rg = ?, nacionalidade = ?, data_nascimento = ?, estado_civil = ? "
+            String sql = "UPDATE funcionario SET "
+                    + "nome = ?, cpf = ?, data_nascimento = ?, "
+                    + "cargo = ?, estado_civil = ? "
                     + "WHERE nome = ?";
             
             ps = conn.prepareStatement(sql);
             
             ps.setString(1, textFieldAlterarNome.getText());
             ps.setString(2, textFieldAlterarCPF.getText());
-            ps.setString(3, textFieldAlterarRG.getText());
-            ps.setString(4, textFieldAlterarNacionalidade.getText());
             
             dataNascimento = LocalDate.parse(textFieldAlterarDataNascimento.getText(), dtf);
             
-            ps.setDate(5, Date.valueOf(dataNascimento));
-            ps.setString(6, (String) comboBoxEstadoCivil.getSelectedItem());
-            ps.setString(7, nomeBusca);
+            ps.setDate(3, Date.valueOf(dataNascimento));
+            ps.setString(4, (String) comboBoxCargo.getSelectedItem());
+            ps.setString(5, (String) comboBoxEstadoCivil.getSelectedItem());
+            ps.setString(6, nomeBusca);
          
             int n = ps.executeUpdate();
             
             if(n > 0){
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso!!!");
+                this.dispose();
             }
             else{
                 JOptionPane.showMessageDialog(null, "Erro ao alterar!!");
@@ -221,6 +226,10 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void comboBoxCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxCargoActionPerformed
 
     public JTextField getTextFieldAlterarCPF() {
         return textFieldAlterarCPF;
@@ -242,45 +251,29 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
         comboBoxEstadoCivil.setSelectedItem(value);
     }
 
-    public JTextField getTextFieldAlterarNacionalidade() {
-        return textFieldAlterarNacionalidade;
-    }
-
-    public void setTextFieldAlterarNacionalidade(String value) {
-        textFieldAlterarNacionalidade.setText(value);
-    }
-
     public JTextField getTextFieldAlterarNome() {
         return textFieldAlterarNome;
     }
 
     public void setTextFieldAlterarNome(String value) {
         textFieldAlterarNome.setText(value);
-    }
-
-    public JTextField getTextFieldAlterarRG() {
-        return textFieldAlterarRG;
-    }
-
-    public void setTextFieldAlterarRG(String value) {
-        textFieldAlterarRG.setText(value);
-    }
-
+    }    
     
+    public void setComboBoxCargo(String value){
+        comboBoxCargo.setSelectedItem(value);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxCargo;
     private javax.swing.JComboBox<String> comboBoxEstadoCivil;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField textFieldAlterarCPF;
     private javax.swing.JTextField textFieldAlterarDataNascimento;
-    private javax.swing.JTextField textFieldAlterarNacionalidade;
     private javax.swing.JTextField textFieldAlterarNome;
-    private javax.swing.JTextField textFieldAlterarRG;
     // End of variables declaration//GEN-END:variables
 }

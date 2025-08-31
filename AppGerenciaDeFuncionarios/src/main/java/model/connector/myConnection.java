@@ -17,24 +17,16 @@ import javax.swing.JOptionPane;
  */
 public class myConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/empresa";
-    private static final String USUARIO = "developer";
-    private static final String SENHA = "010805";
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-
+    private static final String URL = "jdbc:mysql://localhost:3306/gerenciafuncionario?zeroDateTimeBehaviour=CONVERT_TO_NULL";
+    private static final String USUARIO = "root";
+    private static final String SENHA = "mysql";
+    
     public static Connection getConexao() {
         Connection conexao = null;
         try {
-            Class.forName(DRIVER);
             conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
-            System.out.println("Estabelecida conexão com Banco de Dados");
-            //JOptionPane.showMessageDialog(null, "Estabelecida conexão com Banco de Dados");
-        } catch (ClassNotFoundException erro) {
-            System.out.println("Driver JDBC não encontrado!");
-            //JOptionPane.showMessageDialog(null, "Driver JDBC não encontrado!", "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException erro) {
-            System.out.println("Erro ao conectar com o banco de dados!");
-            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o banco de dados!\n" + erro.getMessage(), "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao conectar com o banco de dados!\n" + erro.getMessage(), "Erro de Conexão", JOptionPane.ERROR_MESSAGE);
         }
         return conexao;
     }
@@ -73,19 +65,8 @@ public class myConnection {
         }
     }
 
-    // O método conectar() parece redundante, pois getConexao() já faz a conexão.
-    // Se você realmente precisar de um método separado, ele faria a mesma coisa que getConexao().
-    public static Connection conectar() {
-        return getConexao();
-    }
-
-    // O método fecharConexao(Connection conexao) é um alias para closeConnection(Connection con).
-    public static void fecharConexao(Connection conexao) {
-        closeConnection(conexao);
-    }
-
     public static Connection getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

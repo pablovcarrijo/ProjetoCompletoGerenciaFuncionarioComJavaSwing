@@ -25,15 +25,15 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
     private AlterarFunPaneDadosBancarios desktopPaneDadosBancarios;
     private AlterarFunContato desktopPaneContato;
     private AlterarFunPaneDadosPessoais desktopPaneDadosPesosas;
-    
+
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+
     private String nameConsulta;
-    
+
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-    
+
     public AlterarFunPane(String nameConsulta) {
         initComponents();
         this.setBorder(null);
@@ -151,26 +151,27 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
         desktopPaneEndereco.setSize(desktopPaneAlterar.getSize());
         desktopPaneEndereco.setLocation(0, 0);
         desktopPaneEndereco.show();
-        
-        try{
-            if(conn == null || conn.isClosed()){
+
+        try {
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else{
+            } else {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
-                System.out.println("A conexão havia dado errado, mas já reestabeleceu");
             }
-            
-            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
-            
+
+            String sql = "SELECT f.nome, f.cpf, ed.cep, ed.cidade, ed.bairro, ed.numero, ed.complemento, ed.rua "
+                    + "FROM funcionario f "
+                    + "JOIN endereco ed ON f.id_endereco = ed.id_endereco "
+                    + "WHERE f.nome = ?";
+
             ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, nameConsulta);
-            
+
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 desktopPaneEndereco.setTextFieldAlterarCEP(rs.getString("cep"));
                 desktopPaneEndereco.setTextFieldAlterarBairro(rs.getString("bairro"));
                 desktopPaneEndereco.setTextFieldAlterarCidade(rs.getString("cidade"));
@@ -178,152 +179,142 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 desktopPaneEndereco.setTextFieldAlterarNumero(rs.getString("numero"));
                 desktopPaneEndereco.setTextFieldAlterarRua(rs.getString("rua"));
             }
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("ERRO AO CONECTAR! " + e.getMessage());
+        } finally {
+            myConnection.closeConnection(conn, ps, rs);
         }
-        finally{
-            myConnection.closeConnection(conn, ps);
-        }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+
         desktopPaneDadosBancarios = new AlterarFunPaneDadosBancarios(nameConsulta);
         desktopPaneAlterar.add(desktopPaneDadosBancarios);
         desktopPaneDadosBancarios.setSize(desktopPaneAlterar.getSize());
         desktopPaneDadosBancarios.setLocation(0, 0);
         desktopPaneDadosBancarios.show();
-        
-        try{
-            
-            if(conn == null || conn.isClosed()){
+
+        try {
+
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else if(conn != null || ! conn.isClosed()){
+            } else if (conn != null || !conn.isClosed()) {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
             }
-            
-            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
-            
+
+            String sql = "SELECT f.nome, f.cpf, db.agencia, db.nome_banco, db.salario, db.numero_conta "
+                    + "FROM funcionario f "
+                    + "JOIN dados_bancarios db ON f.numero_conta_bancaria = db.numero_conta "
+                    + "WHERE f.nome = ?";
+
             ps = conn.prepareStatement(sql);
-            
             ps.setString(1, nameConsulta);
-            
+
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 desktopPaneDadosBancarios.setTextFieldAlterarAgencia(rs.getString("agencia"));
-                desktopPaneDadosBancarios.setTextFieldAlterarCPFTitular(rs.getString("cpf_titular"));
                 desktopPaneDadosBancarios.setTextFieldAlterarNomeBanco(rs.getString("nome_banco"));
-                desktopPaneDadosBancarios.setTextFieldAlterarNomeTitular(rs.getString("nome_titular"));
                 desktopPaneDadosBancarios.setTextFieldAlterarSalario(rs.getString("salario"));
-                desktopPaneDadosBancarios.setTextFieldAlterarTipoConta(rs.getString("tipo_conta"));
+                desktopPaneDadosBancarios.setTextFieldAlterarNumeroConta(rs.getString("numero_conta"));
             }
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro ao conectar banco de dados");
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
         desktopPaneDadosPesosas = new AlterarFunPaneDadosPessoais(nameConsulta);
         desktopPaneAlterar.add(desktopPaneDadosPesosas);
         desktopPaneDadosPesosas.setSize(desktopPaneAlterar.getSize());
         desktopPaneDadosPesosas.setLocation(0, 0);
         desktopPaneDadosPesosas.show();
-        
-        try{
-            if(conn == null || conn.isClosed()){
+
+        try {
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else{
+            } else {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
                 System.out.println("Erro ao conectar, mas conexao já foi reestabelecida");
             }
-            
-            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
 
-            
+            String sql = "SELECT * FROM funcionario WHERE nome = ?";
+
             ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, nameConsulta);
-            
+
             rs = ps.executeQuery();
-            
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 desktopPaneDadosPesosas.setTextFieldAlterarCPF(rs.getString("cpf"));
-                
+
                 String dataString = rs.getString("data_nascimento");
                 LocalDate dataNascimento = LocalDate.parse(dataString);
-                
+
                 String dataFormatada = dataNascimento.format(dtf);
-                
+
                 desktopPaneDadosPesosas.setTextFieldAlterarDataNascimento(dataFormatada);
                 desktopPaneDadosPesosas.setComboBoxEstadoCivil(rs.getString("estado_civil"));
-                desktopPaneDadosPesosas.setTextFieldAlterarNacionalidade(rs.getString("nacionalidade"));
+                desktopPaneDadosPesosas.setComboBoxCargo(rs.getString("cargo"));
                 desktopPaneDadosPesosas.setTextFieldAlterarNome(rs.getString("nome"));
-                desktopPaneDadosPesosas.setTextFieldAlterarRG(rs.getString("rg"));
             }
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro ao conectar...");
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
         desktopPaneContato = new AlterarFunContato(nameConsulta);
         desktopPaneAlterar.add(desktopPaneContato);
         desktopPaneContato.setSize(desktopPaneAlterar.getSize());
         desktopPaneContato.setLocation(0, 0);
         desktopPaneContato.show();
-        
-        try{
-            if(conn == null || conn.isClosed()){
+
+        try {
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else if(conn != null || !conn.isClosed()){
+            } else if (conn != null || !conn.isClosed()) {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
             }
-            
-            String SQL = "SELECT * FROM funcionarios WHERE nome = ?";
-            
-            ps = conn.prepareStatement(SQL);
-            
+
+            String sql = "SELECT f.nome, f.cpf, ct.email, ct.telefone "
+                    + "FROM funcionario f "
+                    + "JOIN contato ct ON f.id_funcionario = ct.id_funcionario "
+                    + "WHERE f.nome = ?";
+
+            ps = conn.prepareStatement(sql);
+
             ps.setString(1, nameConsulta);
-            
+
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 desktopPaneContato.setTextFieldAlterarEmail(rs.getString("email"));
-                desktopPaneContato.setTextFieldAlterarTelefone(rs.getString("telefone"));            
-                
+                desktopPaneContato.setTextFieldAlterarTelefone(rs.getString("telefone"));
+
             }
-        }   
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("Erro ao estabelecer conexao com o banco " + e.getMessage());
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

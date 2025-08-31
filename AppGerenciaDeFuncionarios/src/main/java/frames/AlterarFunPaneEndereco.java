@@ -6,6 +6,7 @@ package frames;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -23,7 +24,8 @@ public class AlterarFunPaneEndereco extends javax.swing.JInternalFrame {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private String nameConsulta;
-    
+    private ResultSet rs = null;
+
     public AlterarFunPaneEndereco(String nameConsulta) {
         initComponents();
         this.setBorder(null);
@@ -164,47 +166,53 @@ public class AlterarFunPaneEndereco extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        try{
-            
-            if(conn == null || conn.isClosed()){
+        try {
+
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else if(conn != null){
+            } else if (conn != null) {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
                 System.out.println("Erro ao estabelecer conexão, mas foi reestabelecida");
             }
-            
-            String sql = "UPDATE funcionarios SET "
+
+            String sqlId = "SELECT id_endereco FROM funcionario WHERE nome = ?";
+            ps = conn.prepareStatement(sqlId);
+            ps.setString(1, nameConsulta);
+            rs = ps.executeQuery();
+            int idEndereco = -1;
+            if(rs.next()){
+                idEndereco = rs.getInt("id_endereco");
+            }
+
+            String sql = "UPDATE endereco SET "
                     + "cep = ?, cidade = ?, bairro = ?, rua = ?, numero = ?, complemento = ? "
-                    + "WHERE nome = ?";
-            
+                    + "WHERE id_endereco = ?";
+
             ps = conn.prepareStatement(sql);
-            
             ps.setString(1, textFieldAlterarCEP.getText());
             ps.setString(2, textFieldAlterarCidade.getText());
             ps.setString(3, textFieldAlterarBairro.getText());
             ps.setString(4, textFieldAlterarRua.getText());
             ps.setInt(5, Integer.parseInt(textFieldAlterarNumero.getText()));
             ps.setString(6, textFieldAlterarComplemento.getText());
-            ps.setString(7, nameConsulta);
+            ps.setInt(7, idEndereco);
 
             int n = ps.executeUpdate();
-            
-            if(n > 0){
+
+            if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
-            }
-            else{
+                this.dispose();
+            } else {
                 JOptionPane.showMessageDialog(null, "Erro na alteração");
             }
-            
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro ao conectar...");
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public JTextField getTextFieldAlterarBairro() {
@@ -255,7 +263,6 @@ public class AlterarFunPaneEndereco extends javax.swing.JInternalFrame {
         textFieldAlterarRua.setText(value);
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

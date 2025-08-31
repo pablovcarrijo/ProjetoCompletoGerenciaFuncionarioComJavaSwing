@@ -34,10 +34,6 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
         labelNameInput = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelCPFInput = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        labelRGInput = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        labelNacionalidadeInput = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         labelDataNascimentoInput = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -66,13 +62,9 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
         labelNomeBancoInput = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         labelAgenciaInput = new javax.swing.JLabel();
-        JLabel4 = new javax.swing.JLabel();
-        labelTipoDeContaInput = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        labelNomeTitularInput = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        labelCPFTitularInput = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        labelNumeroContaInput = new javax.swing.JLabel();
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nome completo :");
@@ -85,18 +77,6 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
 
         labelCPFInput.setForeground(new java.awt.Color(0, 0, 0));
         labelCPFInput.setText(" -");
-
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("RG : ");
-
-        labelRGInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelRGInput.setText(" -");
-
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Nacionalidade :");
-
-        labelNacionalidadeInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelNacionalidadeInput.setText(" -");
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Data nascimento :");
@@ -182,25 +162,13 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
         labelAgenciaInput.setForeground(new java.awt.Color(0, 0, 0));
         labelAgenciaInput.setText(" -");
 
-        JLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        JLabel4.setText("Tipo de conta :");
-
-        labelTipoDeContaInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelTipoDeContaInput.setText(" -");
-
-        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel42.setText("Nome titular :");
-
-        labelNomeTitularInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelNomeTitularInput.setText(" -");
-
-        jLabel44.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel44.setText("CPF titular :");
-
-        labelCPFTitularInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelCPFTitularInput.setText(" -");
-
         jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/planing.png"))); // NOI18N
+
+        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel39.setText("Numero da conta: ");
+
+        labelNumeroContaInput.setForeground(new java.awt.Color(0, 0, 0));
+        labelNumeroContaInput.setText(" -");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,19 +187,10 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelCPFInput))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelNacionalidadeInput))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelRGInput))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelDataNascimentoInput)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(12, 12, 12)
+                                .addComponent(labelDataNascimentoInput))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(12, 12, 12)
@@ -288,25 +247,15 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel39)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(labelNumeroContaInput))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel38)
                                         .addGap(12, 12, 12)
-                                        .addComponent(labelAgenciaInput))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(JLabel4)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(labelTipoDeContaInput)))))
+                                        .addComponent(labelAgenciaInput)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel44)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelCPFTitularInput))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel42)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelNomeTitularInput))))
+                        .addComponent(jLabel32)
                         .addGap(147, 147, 147))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel16)
@@ -333,14 +282,10 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
                             .addComponent(labelCidadeInput))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(labelRGInput)
                             .addComponent(jLabel20)
                             .addComponent(labelBairroInput))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(labelNacionalidadeInput)
                             .addComponent(jLabel22)
                             .addComponent(labelRuaInput))
                         .addGap(18, 18, 18)
@@ -367,6 +312,14 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
                 .addGap(108, 108, 108)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel38)
+                            .addComponent(labelAgenciaInput))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel39)
+                            .addComponent(labelNumeroContaInput)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel14)
@@ -377,30 +330,21 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNomeBancoInput)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel42)
-                                .addComponent(labelNomeTitularInput))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel44)
-                                .addComponent(labelCPFTitularInput)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel38)
-                                .addComponent(labelAgenciaInput))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(JLabel4)
-                                .addComponent(labelTipoDeContaInput)))))
+                            .addComponent(labelNomeBancoInput))))
                 .addGap(95, 95, 95))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JLabel getLabelNumeroContaInput() {
+        return labelNumeroContaInput;
+    }
+
+    public void setLabelNumeroContaInput(String value) {
+        labelNumeroContaInput.setText(value);
+    }
+    
     public JLabel getLabelAgenciaInput() {
         return labelAgenciaInput;
     }
@@ -431,14 +375,6 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
 
     public void setLabelCPFInput(String value) {
         labelCPFInput.setText(value);
-    }
-
-    public JLabel getLabelCPFTitularInput() {
-        return labelCPFTitularInput;
-    }
-
-    public void setLabelCPFTitularInput(String value) {
-        labelCPFTitularInput.setText(value);
     }
 
     public JLabel getLabelCargoEmpresarialInput() {
@@ -489,14 +425,6 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
         labelEstadoCivilInput.setText(value);
     }
 
-    public JLabel getLabelNacionalidadeInput() {
-        return labelNacionalidadeInput;
-    }
-
-    public void setLabelNacionalidadeInput(String value) {
-        labelNacionalidadeInput.setText(value);
-    }
-
     public JLabel getLabelNameInput() {
         return labelNameInput;
     }
@@ -513,28 +441,12 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
         labelNomeBancoInput.setText(value);
     }
 
-    public JLabel getLabelNomeTitularInputs() {
-        return labelNomeTitularInput;
-    }
-
-    public void setLabelNomeTitularInput(String value) {
-        labelNomeTitularInput.setText(value);
-    }
-
     public JLabel getLabelNumeroEnderecoInput() {
         return labelNumeroEnderecoInput;
     }
 
     public void setLabelNumeroEnderecoInput(String value) {
         labelNumeroEnderecoInput.setText(value);
-    }
-
-    public JLabel getLabelRGInput() {
-        return labelRGInput;
-    }
-
-    public void setLabelRGInput(String value) {
-        labelRGInput.setText(value);
     }
 
     public JLabel getLabelRuaInput() {
@@ -561,17 +473,7 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
         labelTelefoneInput.setText(value);
     }
 
-    public JLabel getLabelTipoDeContaInput() {
-        return labelTipoDeContaInput;
-    }
-
-    public void setLabelTipoContaInput(String value) {
-        labelTipoDeContaInput.setText(value);
-    }
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLabel4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -588,31 +490,24 @@ public class ConsultaFunPane extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel labelAgenciaInput;
     private javax.swing.JLabel labelBairroInput;
     private javax.swing.JLabel labelCEPInput;
     private javax.swing.JLabel labelCPFInput;
-    private javax.swing.JLabel labelCPFTitularInput;
     private javax.swing.JLabel labelCargoEmpresarialInput;
     private javax.swing.JLabel labelCidadeInput;
     private javax.swing.JLabel labelComplementoEnderecoInput;
     private javax.swing.JLabel labelDataNascimentoInput;
     private javax.swing.JLabel labelEmailInput;
     private javax.swing.JLabel labelEstadoCivilInput;
-    private javax.swing.JLabel labelNacionalidadeInput;
     private javax.swing.JLabel labelNameInput;
     private javax.swing.JLabel labelNomeBancoInput;
-    private javax.swing.JLabel labelNomeTitularInput;
+    private javax.swing.JLabel labelNumeroContaInput;
     private javax.swing.JLabel labelNumeroEnderecoInput;
-    private javax.swing.JLabel labelRGInput;
     private javax.swing.JLabel labelRuaInput;
     private javax.swing.JLabel labelSalarioInput;
     private javax.swing.JLabel labelTelefoneInput;
-    private javax.swing.JLabel labelTipoDeContaInput;
     // End of variables declaration//GEN-END:variables
 }

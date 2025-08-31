@@ -6,6 +6,7 @@ package frames;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -22,7 +23,8 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
      */
     private Connection conn = null;
     private PreparedStatement ps = null;
-    private String nameConsulta;    
+    private String nameConsulta;
+    private ResultSet rs = null;
     
     public AlterarFunContato(String nameConsulta) {
         initComponents();
@@ -120,20 +122,30 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
             
-            String SQL = "UPDATE funcionarios SET "
-                    + "email = ?, telefone = ? "
+            String sqlId = "SELECT id_funcionario FROM funcionario "
                     + "WHERE nome = ?";
             
-            ps = conn.prepareStatement(SQL);
+            ps = conn.prepareStatement(sqlId);
+            ps.setString(1, nameConsulta);
+            rs = ps.executeQuery();
+            int idFuncionario = -1;
+            if(rs.next()){
+                idFuncionario = rs.getInt("id_funcionario");
+            }
             
+            String sql = "UPDATE contato SET email = ?, telefone = ?"
+                    + " WHERE id_funcionario = ?";
+            
+            ps = conn.prepareStatement(sql);            
             ps.setString(1, textFieldAlterarEmail.getText());
             ps.setString(2, textFieldAlterarTelefone.getText());
-            ps.setString(3, nameConsulta);
+            ps.setInt(3, idFuncionario);
             
             int n = ps.executeUpdate();
             
             if(n > 0){
                 JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso");
+                this.dispose();
             }
             else{
                 JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário");

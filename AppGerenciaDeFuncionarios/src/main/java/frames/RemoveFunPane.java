@@ -50,17 +50,11 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         labelCargoEmpresarialInput = new javax.swing.JLabel();
         labelAgenciaInput = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        JLabel4 = new javax.swing.JLabel();
         labelCEPInput = new javax.swing.JLabel();
-        labelTipoContaInput = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
         labelCidadeInput = new javax.swing.JLabel();
-        labelNomeTitularInput = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
         labelBairroInput = new javax.swing.JLabel();
-        labelCPFTitularInput = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         labelRuaInput = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
@@ -70,11 +64,8 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         labelCPFInput = new javax.swing.JLabel();
         labelComplementoEnderecoInput = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        labelRGInput = new javax.swing.JLabel();
         labelTelefoneInput = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        labelNacionalidadeInput = new javax.swing.JLabel();
         labelEmailInput = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -83,8 +74,9 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         labelEstadoCivilInput = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        labelNumeroContaInput = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(80, 80, 80));
 
@@ -115,38 +107,20 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("CEP :");
 
-        JLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        JLabel4.setText("Tipo de conta :");
-
         labelCEPInput.setForeground(new java.awt.Color(0, 0, 0));
         labelCEPInput.setText(" -");
-
-        labelTipoContaInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelTipoContaInput.setText(" -");
 
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Cidade :");
 
-        jLabel42.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel42.setText("Nome titular :");
-
         labelCidadeInput.setForeground(new java.awt.Color(0, 0, 0));
         labelCidadeInput.setText(" -");
-
-        labelNomeTitularInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelNomeTitularInput.setText(" -");
 
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Bairro :");
 
-        jLabel44.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel44.setText("CPF titular :");
-
         labelBairroInput.setForeground(new java.awt.Color(0, 0, 0));
         labelBairroInput.setText(" -");
-
-        labelCPFTitularInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelCPFTitularInput.setText(" -");
 
         jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Rua :");
@@ -174,20 +148,11 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Telefone  : ");
 
-        labelRGInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelRGInput.setText(" -");
-
         labelTelefoneInput.setForeground(new java.awt.Color(0, 0, 0));
         labelTelefoneInput.setText(" -");
 
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Nacionalidade :");
-
         jLabel30.setForeground(new java.awt.Color(0, 0, 0));
         jLabel30.setText("Email :");
-
-        labelNacionalidadeInput.setForeground(new java.awt.Color(0, 0, 0));
-        labelNacionalidadeInput.setText(" -");
 
         labelEmailInput.setForeground(new java.awt.Color(0, 0, 0));
         labelEmailInput.setText(" -");
@@ -217,11 +182,14 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("RG :");
-
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("CPF :");
+
+        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel39.setText("Numero conta");
+
+        labelNumeroContaInput.setForeground(new java.awt.Color(0, 0, 0));
+        labelNumeroContaInput.setText(" -");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,7 +202,7 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelCargoEmpresarialInput)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel34)
@@ -256,19 +224,10 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel4)
                                 .addGap(12, 12, 12)
                                 .addComponent(labelCPFInput))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelNacionalidadeInput))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelRGInput))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelDataNascimentoInput)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(12, 12, 12)
+                                .addComponent(labelDataNascimentoInput))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addGap(12, 12, 12)
@@ -314,25 +273,15 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel39)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(labelNumeroContaInput))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel38)
                                         .addGap(12, 12, 12)
-                                        .addComponent(labelAgenciaInput))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(JLabel4)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(labelTipoContaInput)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel44)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelCPFTitularInput))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel42)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(labelNomeTitularInput))))
+                                        .addComponent(labelAgenciaInput)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(jLabel32)
                         .addGap(479, 479, 479))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -357,27 +306,29 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                             .addComponent(labelCidadeInput)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelRGInput)
-                            .addComponent(jLabel20)
-                            .addComponent(labelBairroInput)
-                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel20)
+                                    .addComponent(labelBairroInput))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel22)
+                                    .addComponent(labelRuaInput)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(labelDataNascimentoInput))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(labelEstadoCivilInput))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(labelNacionalidadeInput)
-                            .addComponent(jLabel22)
-                            .addComponent(labelRuaInput))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(labelDataNascimentoInput)
                             .addComponent(jLabel24)
                             .addComponent(labelNumeroEnderecoInput))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(labelEstadoCivilInput)
                             .addComponent(jLabel26)
                             .addComponent(labelComplementoEnderecoInput)))
                     .addComponent(jLabel32))
@@ -405,23 +356,14 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelNomeBancoInput)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel42)
-                                .addComponent(labelNomeTitularInput))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel44)
-                                .addComponent(labelCPFTitularInput)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel38)
-                                .addComponent(labelAgenciaInput))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(JLabel4)
-                                .addComponent(labelTipoContaInput)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel38)
+                            .addComponent(labelAgenciaInput))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel39)
+                            .addComponent(labelNumeroContaInput))))
                 .addGap(69, 69, 69))
         );
 
@@ -443,17 +385,43 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                     conn = myConnection.getConexao();
                 }
                 else System.out.println("Deu errado conectar");
-             
-                String sql = "DELETE FROM funcionarios WHERE nome = ?";
-                ps = conn.prepareStatement(sql);
                 
                 String nameConsulta = labelNameInput.getText();
-                
+             
+                //PEGANDO IDs DE FUNCIONARIO PARA EXCLUIR ENDERECO E DADOS_BANCARIOS
+                String sqlId = "SELECT * FROM funcionario WHERE nome = ?";
+                ps = conn.prepareStatement(sqlId);
                 ps.setString(1, nameConsulta);
                 
+                int idEndereco = -1;
+                int idDadosBancarios = -1;
+                
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    idEndereco = rs.getInt("id_endereco");
+                    idDadosBancarios = rs.getInt("numero_conta_bancaria");
+                }
+                
+                // DELETANDO FUNCIONARIO
+                String sqlDelFun = "DELETE FROM funcionario WHERE nome = ?";
+                ps = conn.prepareStatement(sqlDelFun);
+                ps.setString(1, nameConsulta);
                 int n = ps.executeUpdate();
                 
-                if(n > 0){
+                // DELETANDO ENDERECO
+                String sqlDelEndereco = "DELETE FROM endereco WHERE id_endereco = ?";
+                ps = conn.prepareStatement(sqlDelEndereco);
+                ps.setInt(1, idEndereco);
+                int z = ps.executeUpdate();
+                
+                // DELETANDO DADOS BANCARIOS
+                String sqlDelDadosBancarios = "DELETE FROM dados_bancarios WHERE "
+                        + "numero_conta = ?";
+                ps = conn.prepareStatement(sqlDelDadosBancarios);
+                ps.setInt(1, idDadosBancarios);
+                int y = ps.executeUpdate();
+                
+                if(n > 0 && y > 0 && z > 0){
                     JOptionPane.showMessageDialog(null, "Excluido com sucesso");
                 }
                 else{
@@ -465,10 +433,10 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                 System.out.println("Conexao de dados deu errado");
             }
             finally{
-                myConnection.closeConnection(conn, ps);
+                myConnection.closeConnection(conn, ps, rs);
             }
             
-            
+            this.dispose();
             
         }
         
@@ -504,14 +472,6 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
 
     public void setLabelCPFInput(String value) {
         labelCPFInput.setText(value);
-    }
-
-    public JLabel getLabelCPFTitularInput() {
-        return labelCPFTitularInput;
-    }
-
-    public void setLabelCPFTitularInput(String value) {
-        labelCPFTitularInput.setText(value);
     }
 
     public JLabel getLabelCargoEmpresarialInput() {
@@ -562,14 +522,6 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         labelEstadoCivilInput.setText(value);
     }
 
-    public JLabel getLabelNacionalidadeInput() {
-        return labelNacionalidadeInput;
-    }
-
-    public void setLabelNacionalidadeInput(String value) {
-        labelNacionalidadeInput.setText(value);
-    }
-
     public JLabel getLabelNameInput() {
         return labelNameInput;
     }
@@ -586,14 +538,6 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         labelNomeBancoInput.setText(value);
     }
 
-    public JLabel getLabelNomeTitularInput() {
-        return labelNomeTitularInput;
-    }
-
-    public void setLabelNomeTitularInput(String value) {
-        labelNomeTitularInput.setText(value);
-    }
-
     public JLabel getLabelNumeroEnderecoInput() {
         return labelNumeroEnderecoInput;
     }
@@ -601,15 +545,7 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     public void setLabelNumeroEnderecoInput(String value) {
         labelNumeroEnderecoInput.setText(value);
     }
-
-    public JLabel getLabelRGInput() {
-        return labelRGInput;
-    }
-
-    public void setLabelRGInput(String value) {
-        labelRGInput.setText(value);
-    }
-
+    
     public JLabel getLabelRuaInput() {
         return labelRuaInput;
     }
@@ -634,18 +570,16 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         labelTelefoneInput.setText(value);
     }
 
-    public JLabel getLabelTipoDeContaInput() {
-        return labelTipoContaInput;
+    public JLabel getLabelNumeroContaInput() {
+        return labelNumeroContaInput;
     }
 
-    public void setLabelTipoContaInput(String value) {
-        labelTipoContaInput.setText(value);
-    }
-
+    public void setLabelNumeroContaInput(String value) {
+        labelNumeroContaInput.setText(value);
+    }    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLabel4;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -658,36 +592,29 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel labelAgenciaInput;
     private javax.swing.JLabel labelBairroInput;
     private javax.swing.JLabel labelCEPInput;
     private javax.swing.JLabel labelCPFInput;
-    private javax.swing.JLabel labelCPFTitularInput;
     private javax.swing.JLabel labelCargoEmpresarialInput;
     private javax.swing.JLabel labelCidadeInput;
     private javax.swing.JLabel labelComplementoEnderecoInput;
     private javax.swing.JLabel labelDataNascimentoInput;
     private javax.swing.JLabel labelEmailInput;
     private javax.swing.JLabel labelEstadoCivilInput;
-    private javax.swing.JLabel labelNacionalidadeInput;
     private javax.swing.JLabel labelNameInput;
     private javax.swing.JLabel labelNomeBancoInput;
-    private javax.swing.JLabel labelNomeTitularInput;
+    private javax.swing.JLabel labelNumeroContaInput;
     private javax.swing.JLabel labelNumeroEnderecoInput;
-    private javax.swing.JLabel labelRGInput;
     private javax.swing.JLabel labelRuaInput;
     private javax.swing.JLabel labelSalarioInput;
     private javax.swing.JLabel labelTelefoneInput;
-    private javax.swing.JLabel labelTipoContaInput;
     // End of variables declaration//GEN-END:variables
 }

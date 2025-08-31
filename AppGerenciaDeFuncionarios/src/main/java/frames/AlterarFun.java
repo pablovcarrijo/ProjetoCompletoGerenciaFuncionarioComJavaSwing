@@ -4,6 +4,13 @@
  */
 package frames;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import model.connector.myConnection;
+
 /**
  *
  * @author PabloCarrijo
@@ -14,6 +21,10 @@ public class AlterarFun extends javax.swing.JInternalFrame {
      * Creates new form AlterarFun
      */
     public AlterarFunPane alterarPane;
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
+    
     public AlterarFun() {
         initComponents();
         this.setBorder(null);
@@ -118,12 +129,37 @@ public class AlterarFun extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        alterarPane = new AlterarFunPane(textNamePesquisaAltera.getText());
-        
-        desktopPaneAlterar.add(alterarPane);
-        alterarPane.setSize(desktopPaneAlterar.getSize());
-        alterarPane.setLocation(0, 0);
-        alterarPane.show();
+
+        try {
+
+            if (conn == null || conn.isClosed()) {
+                conn = myConnection.getConexao();
+            } else if (conn != null && !conn.isClosed()) {
+                conn = myConnection.getConexao();
+            }
+
+            String sql = "SELECT * FROM funcionario WHERE nome = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, textNamePesquisaAltera.getText());
+            rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(rootPane, "Nenhuma funcionário cadastrado...");
+            } 
+            else {
+                alterarPane = new AlterarFunPane(textNamePesquisaAltera.getText());
+                desktopPaneAlterar.add(alterarPane);
+                alterarPane.setSize(desktopPaneAlterar.getSize());
+                alterarPane.setLocation(0, 0);
+                alterarPane.show();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao conectar banco de dados..." + e.getMessage());
+        } finally {
+            myConnection.closeConnection(conn, ps, rs);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

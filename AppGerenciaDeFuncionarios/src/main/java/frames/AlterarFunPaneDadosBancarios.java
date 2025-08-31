@@ -20,11 +20,10 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
     /**
      * Creates new form AlterarFunPaneDadosBancarios
      */
-    
     private Connection conn = null;
     private PreparedStatement ps = null;
     private String nameConsulta;
-    
+
     public AlterarFunPaneDadosBancarios(String nameConsulta) {
         initComponents();
         this.setBorder(null);
@@ -42,18 +41,16 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        textFieldAlterarNomeTitular = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         textFieldAlterarNomeBanco = new javax.swing.JTextField();
-        textFieldAlterarTipoConta = new javax.swing.JTextField();
+        textFieldAlterarNumeroConta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        textFieldAlterarCPFTitular = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         textFieldAlterarAgencia = new javax.swing.JTextField();
         textFieldAlterarSalario = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Salario  :");
@@ -61,20 +58,18 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nome banco :");
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Nome titular :");
-
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Tipo conta :");
-
-        textFieldAlterarCPFTitular.addActionListener(new java.awt.event.ActionListener() {
+        textFieldAlterarNumeroConta.setEditable(false);
+        textFieldAlterarNumeroConta.setBackground(new java.awt.Color(204, 204, 204));
+        textFieldAlterarNumeroConta.setForeground(new java.awt.Color(0, 0, 0));
+        textFieldAlterarNumeroConta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(60, 63, 65)));
+        textFieldAlterarNumeroConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAlterarCPFTitularActionPerformed(evt);
+                textFieldAlterarNumeroContaActionPerformed(evt);
             }
         });
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("CPF titular :");
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Numero da conta:");
 
         jButton1.setText("Alterar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,116 +91,96 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textFieldAlterarAgencia)
                     .addComponent(textFieldAlterarSalario)
                     .addComponent(textFieldAlterarNomeBanco)
-                    .addComponent(textFieldAlterarNomeTitular, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(textFieldAlterarTipoConta, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(textFieldAlterarCPFTitular, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                    .addComponent(textFieldAlterarNumeroConta, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(399, 399, 399))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldAlterarSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(textFieldAlterarNomeBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textFieldAlterarNumeroConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(textFieldAlterarNomeBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(textFieldAlterarAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldAlterarTipoConta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldAlterarNomeTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFieldAlterarCPFTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(222, Short.MAX_VALUE))
+                            .addComponent(textFieldAlterarSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textFieldAlterarCPFTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAlterarCPFTitularActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAlterarCPFTitularActionPerformed
 
     private void textFieldAlterarSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAlterarSalarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldAlterarSalarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        try{
-            
-            if(conn == null || conn.isClosed()){
+
+        try {
+
+            if (conn == null || conn.isClosed()) {
+                conn = myConnection.getConexao();
+            } else if (conn != null && !conn.isClosed()) {
                 conn = myConnection.getConexao();
             }
-            else if(conn != null || !conn.isClosed()){
-                conn = myConnection.getConexao();
-            }
-            
-            String SQL = "UPDATE funcionarios SET "
-                    + "nome_banco = ?, salario = ?, agencia = ?, tipo_conta = ?, nome_titular = ?, "
-                    + "cpf_titular = ? "
-                    + "WHERE nome = ?";
-            ps = conn.prepareStatement(SQL);
-            
+
+            // Atualiza dados bancários
+            String sqlBanco = "UPDATE dados_bancarios SET nome_banco = ?, agencia = ?, salario = ? WHERE numero_conta = ?";
+            ps = conn.prepareStatement(sqlBanco);
             ps.setString(1, textFieldAlterarNomeBanco.getText());
-            ps.setString(2, textFieldAlterarSalario.getText());
-            ps.setString(3, textFieldAlterarAgencia.getText());
-            ps.setString(4, textFieldAlterarTipoConta.getText());
-            ps.setString(5, textFieldAlterarNomeTitular.getText());
-            ps.setString(6, textFieldAlterarCPFTitular.getText());
-            ps.setString(7, nameConsulta);
-            
+            ps.setString(2, textFieldAlterarAgencia.getText());
+            ps.setDouble(3, Double.parseDouble(textFieldAlterarSalario.getText()));
+            ps.setInt(4, Integer.parseInt(textFieldAlterarNumeroConta.getText()));
+            ps.executeUpdate();
+
             int n = ps.executeUpdate();
-            
-            if(n > 0){
+
+            if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso!");
-            }
-            else{
+                this.dispose();
+            } else {
                 JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário");
             }
-            
-        }
-        catch(SQLException e){
-            System.out.println("Erro ao conectar banco de dados " + e.getMessage());
-        }
-        finally{
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao conectar banco de dados..." + e.getMessage());
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void textFieldAlterarNumeroContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAlterarNumeroContaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldAlterarNumeroContaActionPerformed
 
     public JTextField getTextFieldAlterarAgencia() {
         return textFieldAlterarAgencia;
@@ -213,14 +188,6 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
 
     public void setTextFieldAlterarAgencia(String value) {
         textFieldAlterarAgencia.setText(value);
-    }
-
-    public JTextField getTextFieldAlterarCPFTitular() {
-        return textFieldAlterarCPFTitular;
-    }
-
-    public void setTextFieldAlterarCPFTitular(String value) {
-        textFieldAlterarCPFTitular.setText(value);
     }
 
     public JTextField getTextFieldAlterarNomeBanco() {
@@ -231,14 +198,6 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
         textFieldAlterarNomeBanco.setText(value);
     }
 
-    public JTextField getTextFieldAlterarNomeTitular() {
-        return textFieldAlterarNomeTitular;
-    }
-
-    public void setTextFieldAlterarNomeTitular(String value) {
-        textFieldAlterarNomeTitular.setText(value);
-    }
-
     public JTextField getTextFieldAlterarSalario() {
         return textFieldAlterarSalario;
     }
@@ -247,29 +206,24 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
         textFieldAlterarSalario.setText(value);
     }
 
-    public JTextField getTextFieldAlterarTipoConta() {
-        return textFieldAlterarTipoConta;
+    public JTextField getTextFieldAlterarNumeroConta() {
+        return textFieldAlterarNumeroConta;
     }
 
-    public void setTextFieldAlterarTipoConta(String value) {
-        textFieldAlterarTipoConta.setText(value);
+    public void setTextFieldAlterarNumeroConta(String value) {
+        textFieldAlterarNumeroConta.setText(value);
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField textFieldAlterarAgencia;
-    private javax.swing.JTextField textFieldAlterarCPFTitular;
     private javax.swing.JTextField textFieldAlterarNomeBanco;
-    private javax.swing.JTextField textFieldAlterarNomeTitular;
+    private javax.swing.JTextField textFieldAlterarNumeroConta;
     private javax.swing.JTextField textFieldAlterarSalario;
-    private javax.swing.JTextField textFieldAlterarTipoConta;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,12 +19,11 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
     /**
      * Creates new form BuscaFuncionario
      */
-    
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     ConsultaFunPane consultaFunPane;
-    
+
     public ConsultaFun() {
         initComponents();
         this.setBorder(null);
@@ -131,65 +130,93 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultaActionPerformed
-        
+
         consultaFunPane = new ConsultaFunPane();
         desktopPaneConsulta.add(consultaFunPane);
         consultaFunPane.setSize(desktopPaneConsulta.getSize());
         consultaFunPane.setLocation(0, 0);
         consultaFunPane.show();
-        
-        try{
-         
+
+        try {
+
             conn = myConnection.getConexao();
-            if(conn == null || conn.isClosed()){
+            if (conn == null || conn.isClosed()) {
                 System.out.println("Impossivel estabelecer conexao...");
+            } else {
+                System.out.println("Conexao estabelecida com sucesso...");
             }
-            else System.out.println("Conexao estabelecida com sucesso...");
-            
+
             String nameConsulta = textFieldConsultaFun.getText();
-            
-            String sql = "SELECT * FROM funcionarios WHERE nome = ?";
-            
-            ps = conn.prepareStatement(sql);
-            
+
+            //DADOS PESSOAIS E OS IDs
+            String sqlFuncionarioDados = "SELECT * FROM funcionario WHERE nome = ?";
+            ps = conn.prepareStatement(sqlFuncionarioDados);
             ps.setString(1, nameConsulta);
-            
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            int idEndereco = -1;
+            int idFuncionario = -1;
+            int idDadosBancarios = -1;
+
+            if (rs.next()) {
+                idEndereco = Integer.parseInt(rs.getString("id_endereco"));
+                idFuncionario = Integer.parseInt(rs.getString("id_funcionario"));
+                idDadosBancarios = Integer.parseInt(rs.getString("numero_conta_bancaria"));
+
                 consultaFunPane.setLabelNameInput(rs.getString("nome"));
                 consultaFunPane.setLabelCPFInput(rs.getString("cpf"));
-                consultaFunPane.setLabelRGInput(rs.getString("rg"));
-                consultaFunPane.setLabelNacionalidadeInput(rs.getString("nacionalidade"));
                 consultaFunPane.setLabelDataNascimentoInput(rs.getString("data_nascimento"));
                 consultaFunPane.setLabelEstadoCivilInput(rs.getString("estado_civil"));
                 consultaFunPane.setLabelCargoEmpresarialInput(rs.getString("cargo"));
+            }
+
+            // ENDERECO
+            String sqlEndereco = "SELECT * FROM endereco WHERE id_endereco = ?";
+            ps = conn.prepareStatement(sqlEndereco);
+            ps.setInt(1, idEndereco);
+
+            rs = ps.executeQuery();
+            if(rs.next()) {
                 consultaFunPane.setLabelCEPInput(rs.getString("cep"));
                 consultaFunPane.setLabelCidadeInput(rs.getString("cidade"));
                 consultaFunPane.setLabelBairroInput(rs.getString("bairro"));
                 consultaFunPane.setLabelRuaInput(rs.getString("rua"));
                 consultaFunPane.setLabelNumeroEnderecoInput(rs.getString("numero"));
                 consultaFunPane.setLabelComplementoEnderecoInput(rs.getString("complemento"));
+            }
+
+            // CONTATO
+            String sqlContato = "SELECT * FROM contato WHERE id_funcionario = ?";
+            ps = conn.prepareStatement(sqlContato);
+            ps.setInt(1, idFuncionario);
+
+            rs = ps.executeQuery();
+            if(rs.next()) {
                 consultaFunPane.setLabelTelefoneInput(rs.getString("telefone"));
                 consultaFunPane.setLabelEmailInput(rs.getString("email"));
-                consultaFunPane.setLabelNomeBancoInput(rs.getString("nome_banco"));
-                consultaFunPane.setLabelSalarioInput(rs.getString("salario"));
-                consultaFunPane.setLabelAgenciaInput(rs.getString("agencia"));
-                consultaFunPane.setLabelTipoContaInput(rs.getString("tipo_conta"));
-                consultaFunPane.setLabelNomeTitularInput(rs.getString("nome_titular"));
-                consultaFunPane.setLabelCPFTitularInput(rs.getString("cpf_titular"));
             }
-            
+
+            // DADOS BANCÁRIOS
+            String sqlDadosBancarios = "SELECT * FROM dados_bancarios WHERE numero_conta = ?";
+            ps = conn.prepareStatement(sqlDadosBancarios);
+            ps.setInt(1, idDadosBancarios);
+
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                consultaFunPane.setLabelNumeroContaInput(rs.getString("numero_conta"));
+                consultaFunPane.setLabelNomeBancoInput(rs.getString("nome_banco"));
+                consultaFunPane.setLabelAgenciaInput(rs.getString("agencia"));
+                consultaFunPane.setLabelSalarioInput(rs.getString("salario"));
+            }
+
             textFieldConsultaFun.setText("");
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro com banco de dados" + e.getMessage());
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_buttonConsultaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
