@@ -51,11 +51,13 @@ frames\AlterarFunPaneDadosBancarios$1.class
 frames\AlterarFunPaneDadosPessoais$3.class
 frames\AddFun$4.class
 frames\AddFun$22.class
+frames\ConsultaFun$3.class
 frames\AlterarFunPane$2.class
 frames\AlterarFunPaneDadosBancarios.class
 frames\AddFun$15.class
 frames\AlterarFunPane.class
 frames\AlterarFunPaneDadosPessoais$2.class
+frames\ConsultaFun$4.class
 frames\AlterarFunPaneEndereco.class
 frames\AddFun$21.class
 model\entities\Funcionario.class
