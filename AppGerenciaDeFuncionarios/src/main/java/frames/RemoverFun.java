@@ -205,7 +205,7 @@ public class RemoverFun extends javax.swing.JInternalFrame {
         desktopPaneRemove.setLayout(desktopPaneRemoveLayout);
         desktopPaneRemoveLayout.setHorizontalGroup(
             desktopPaneRemoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1202, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         desktopPaneRemoveLayout.setVerticalGroup(
             desktopPaneRemoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,10 +217,7 @@ public class RemoverFun extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(desktopPaneRemove)
-                .addContainerGap())
+            .addComponent(desktopPaneRemove)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
