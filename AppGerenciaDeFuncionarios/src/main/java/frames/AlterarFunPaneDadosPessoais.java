@@ -25,22 +25,21 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
      * Creates new form AlterarFunPaneDadosPessoais
      */
     private LocalDate dataNascimento;
-    
+
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
+
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-    
+
     private String nomeBusca;
-    
+
     public AlterarFunPaneDadosPessoais(String nomeBusca) {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.nomeBusca = nomeBusca;
-        
-        
+
         comboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
             "Soleiro(a)",
             "Casado(a)",
@@ -48,7 +47,7 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
             "Divorciado(a)",
             "União estável"
         }));
-        
+
         comboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
             "Gerente geral",
             "Subgerente",
@@ -57,7 +56,7 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
             "Financeiro/Contador",
             "Analista de compras"
         }));
-        
+
     }
 
     /**
@@ -182,51 +181,47 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textFieldAlterarNomeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        try{
-            if(conn == null || conn.isClosed()){
+
+        try {
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else{
+            } else {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
             }
-            
-            String sql = "UPDATE funcionario SET "
+
+            String sql = "UPDATE paciente SET "
                     + "nome = ?, cpf = ?, data_nascimento = ?, "
                     + "cargo = ?, estado_civil = ? "
                     + "WHERE nome = ?";
-            
+
             ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, textFieldAlterarNome.getText());
             ps.setString(2, textFieldAlterarCPF.getText());
-            
+
             dataNascimento = LocalDate.parse(textFieldAlterarDataNascimento.getText(), dtf);
-            
+
             ps.setDate(3, Date.valueOf(dataNascimento));
             ps.setString(4, (String) comboBoxCargo.getSelectedItem());
             ps.setString(5, (String) comboBoxEstadoCivil.getSelectedItem());
             ps.setString(6, nomeBusca);
-         
+
             int n = ps.executeUpdate();
-            
-            if(n > 0){
-                JOptionPane.showMessageDialog(null, "Atualizado com sucesso!!!");
+
+            if (n > 0) {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Atualizado com sucesso!!!");
                 this.dispose();
+            } else {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao alterar!!");
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Erro ao alterar!!");
-            }
-            
-        }
-        catch(SQLException e){
-            System.out.println("Erro ao carregar banco de dados "  + e.getMessage());
-        }
-        finally{
+
+        } catch (SQLException e) {
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao carregar banco de dados " + e.getMessage());
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void comboBoxCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCargoActionPerformed
@@ -259,9 +254,9 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
 
     public void setTextFieldAlterarNome(String value) {
         textFieldAlterarNome.setText(value);
-    }    
-    
-    public void setComboBoxCargo(String value){
+    }
+
+    public void setComboBoxCargo(String value) {
         comboBoxCargo.setSelectedItem(value);
     }
 

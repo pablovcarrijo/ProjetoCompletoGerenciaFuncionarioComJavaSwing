@@ -167,14 +167,14 @@ public class AlterarFunPaneDadosBancarios extends javax.swing.JInternalFrame {
             int n = ps.executeUpdate();
 
             if (n > 0) {
-                JOptionPane.showMessageDialog(null, "Usuario alterado com sucesso!");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Funcionario cadastrado com sucesso");
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(),  "Erro ao atualizar usuário");
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar banco de dados..." + e.getMessage());
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao conectar banco de dados..." + e.getMessage());
         } finally {
             myConnection.closeConnection(conn, ps);
         }

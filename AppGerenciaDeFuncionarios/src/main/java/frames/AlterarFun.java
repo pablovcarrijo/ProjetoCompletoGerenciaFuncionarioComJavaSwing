@@ -131,7 +131,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
     private List<String> buscarNoBanco(String texto) {
         List<String> nomes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM funcionario WHERE nome LIKE ? LIMIT 10")) {
+                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
 
             stmt.setString(1, texto + "%");
             ResultSet rs = stmt.executeQuery();
@@ -252,14 +252,14 @@ public class AlterarFun extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT * FROM funcionario WHERE nome = ?";
+            String sql = "SELECT * FROM paciente WHERE nome = ?";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, textNamePesquisaAltera.getText());
             rs = ps.executeQuery();
 
             if (!rs.next()) {
-                JOptionPane.showMessageDialog(rootPane, "Nenhuma funcionário cadastrado...");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Nenhuma paciente cadastrado...");
             } else {
                 alterarPane = new AlterarFunPane(textNamePesquisaAltera.getText());
                 desktopPaneAlterar.add(alterarPane);
@@ -269,7 +269,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar banco de dados..." + e.getMessage());
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao conectar banco de dados..." + e.getMessage());
         } finally {
             myConnection.closeConnection(conn, ps, rs);
         }

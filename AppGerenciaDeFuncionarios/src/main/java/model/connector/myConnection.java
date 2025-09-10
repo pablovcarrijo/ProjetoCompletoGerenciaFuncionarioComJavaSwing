@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class myConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/gerenciafuncionario?zeroDateTimeBehaviour=CONVERT_TO_NULL";
+    private static final String URL = "jdbc:mysql://localhost:3306/sistema_medico?zeroDateTimeBehaviour=CONVERT_TO_NULL";
     private static final String USUARIO = "root";
     private static final String SENHA = "mysql";
     

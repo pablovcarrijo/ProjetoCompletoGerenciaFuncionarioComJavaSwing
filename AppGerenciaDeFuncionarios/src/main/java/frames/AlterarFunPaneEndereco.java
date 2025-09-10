@@ -175,15 +175,15 @@ public class AlterarFunPaneEndereco extends javax.swing.JInternalFrame {
             } else if (conn != null) {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
-                System.out.println("Erro ao estabelecer conexão, mas foi reestabelecida");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao estabelecer conexão, mas foi reestabelecida");
             }
 
-            String sqlId = "SELECT id_endereco FROM funcionario WHERE nome = ?";
+            String sqlId = "SELECT id_endereco FROM paciente WHERE nome = ?";
             ps = conn.prepareStatement(sqlId);
             ps.setString(1, nameConsulta);
             rs = ps.executeQuery();
             int idEndereco = -1;
-            if(rs.next()){
+            if (rs.next()) {
                 idEndereco = rs.getInt("id_endereco");
             }
 
@@ -203,14 +203,14 @@ public class AlterarFunPaneEndereco extends javax.swing.JInternalFrame {
             int n = ps.executeUpdate();
 
             if (n > 0) {
-                JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Alteração realizada com sucesso");
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Erro na alteração");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro na alteração");
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar...");
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao conectar...");
         } finally {
             myConnection.closeConnection(conn, ps);
         }

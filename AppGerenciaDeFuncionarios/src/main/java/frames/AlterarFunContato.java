@@ -25,7 +25,7 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
     private PreparedStatement ps = null;
     private String nameConsulta;
     private ResultSet rs = null;
-    
+
     public AlterarFunContato(String nameConsulta) {
         initComponents();
         this.setBorder(null);
@@ -113,54 +113,49 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textFieldAlterarEmailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        try{
-            
-            if(conn == null || conn.isClosed()){
+
+        try {
+
+            if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
-            }
-            else if(conn != null || !conn.isClosed()){
+            } else if (conn != null || !conn.isClosed()) {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
             }
-            
-            String sqlId = "SELECT id_funcionario FROM funcionario "
+
+            String sqlId = "SELECT id_paciente FROM paciente "
                     + "WHERE nome = ?";
-            
+
             ps = conn.prepareStatement(sqlId);
             ps.setString(1, nameConsulta);
             rs = ps.executeQuery();
-            int idFuncionario = -1;
-            if(rs.next()){
-                idFuncionario = rs.getInt("id_funcionario");
+            int idPaciente = -1;
+            if (rs.next()) {
+                idPaciente = rs.getInt("id_paciente");
             }
-            
+
             String sql = "UPDATE contato SET email = ?, telefone = ?"
-                    + " WHERE id_funcionario = ?";
-            
-            ps = conn.prepareStatement(sql);            
+                    + " WHERE id_paciente = ?";
+
+            ps = conn.prepareStatement(sql);
             ps.setString(1, textFieldAlterarEmail.getText());
             ps.setString(2, textFieldAlterarTelefone.getText());
-            ps.setInt(3, idFuncionario);
-            
+            ps.setInt(3, idPaciente);
+
             int n = ps.executeUpdate();
-            
-            if(n > 0){
-                JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso");
-                this.dispose();
+
+            if (n > 0) {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Email do paciente alterado com sucesso");
+            } else {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao alterar email do paciente");
             }
-            else{
-                JOptionPane.showMessageDialog(null, "Erro ao atualizar usuário");
-            }
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println("Erro ao conectar com o banco " + e.getMessage());
-        }
-        finally{
+        } finally {
             myConnection.closeConnection(conn, ps);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public JTextField getTextFieldAlterarEmail() {
@@ -179,7 +174,6 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
         textFieldAlterarTelefone.setText(value);
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

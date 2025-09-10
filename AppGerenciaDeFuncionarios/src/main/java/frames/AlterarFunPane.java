@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 import model.connector.myConnection;
 
 /**
@@ -127,8 +128,8 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(desktopPaneAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(desktopPaneAlterar))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,7 +162,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             }
 
             String sql = "SELECT f.nome, f.cpf, ed.cep, ed.cidade, ed.bairro, ed.numero, ed.complemento, ed.rua "
-                    + "FROM funcionario f "
+                    + "FROM paciente f "
                     + "JOIN endereco ed ON f.id_endereco = ed.id_endereco "
                     + "WHERE f.nome = ?";
 
@@ -181,7 +182,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-            System.out.println("ERRO AO CONECTAR! " + e.getMessage());
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "ERRO AO CONECTAR! " + e.getMessage());
         } finally {
             myConnection.closeConnection(conn, ps, rs);
         }
@@ -205,10 +206,10 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT f.nome, f.cpf, db.agencia, db.nome_banco, db.salario, db.numero_conta "
-                    + "FROM funcionario f "
-                    + "JOIN dados_bancarios db ON f.numero_conta_bancaria = db.numero_conta "
-                    + "WHERE f.nome = ?";
+            String sql = "SELECT p.nome, p.cpf, db.agencia, db.nome_banco, db.salario, db.numero_conta "
+                    + "FROM paciente p "
+                    + "JOIN dados_bancarios db ON p.numero_conta_bancaria = db.numero_conta "
+                    + "WHERE p.nome = ?";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, nameConsulta);
@@ -223,7 +224,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar banco de dados");
+            JOptionPane.showInternalMessageDialog(getDesktopPane(),"Erro ao conectar banco de dados");
         } finally {
             myConnection.closeConnection(conn, ps);
         }
@@ -244,10 +245,10 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             } else {
                 myConnection.closeConnection(conn, ps);
                 conn = myConnection.getConexao();
-                System.out.println("Erro ao conectar, mas conexao já foi reestabelecida");
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao conectar");
             }
 
-            String sql = "SELECT * FROM funcionario WHERE nome = ?";
+            String sql = "SELECT * FROM paciente WHERE nome = ?";
 
             ps = conn.prepareStatement(sql);
 
@@ -270,7 +271,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             }
 
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar...");
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao conectar...");
         } finally {
             myConnection.closeConnection(conn, ps);
         }
@@ -293,10 +294,10 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT f.nome, f.cpf, ct.email, ct.telefone "
-                    + "FROM funcionario f "
-                    + "JOIN contato ct ON f.id_funcionario = ct.id_funcionario "
-                    + "WHERE f.nome = ?";
+            String sql = "SELECT p.nome, p.cpf, ct.email, ct.telefone "
+                    + "FROM paciente p "
+                    + "JOIN contato ct ON p.id_paciente = ct.id_paciente "
+                    + "WHERE p.nome = ?";
 
             ps = conn.prepareStatement(sql);
 
@@ -310,7 +311,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao estabelecer conexao com o banco " + e.getMessage());
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao estabelecer conexao com o banco " + e.getMessage());
         } finally {
             myConnection.closeConnection(conn, ps);
         }

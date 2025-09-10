@@ -119,7 +119,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
     private List<String> buscarNoBanco(String texto) {
         List<String> nomes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM funcionario WHERE nome LIKE ? LIMIT 10")) {
+                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
 
             stmt.setString(1, texto + "%");
             ResultSet rs = stmt.executeQuery();
@@ -231,7 +231,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
             String nameConsulta = textFieldConsultaFun.getText();
 
             //DADOS PESSOAIS E OS IDs
-            String sqlFuncionarioDados = "SELECT * FROM funcionario WHERE nome = ?";
+            String sqlFuncionarioDados = "SELECT * FROM paciente WHERE nome = ?";
             ps = conn.prepareStatement(sqlFuncionarioDados);
             ps.setString(1, nameConsulta);
             rs = ps.executeQuery();
@@ -242,7 +242,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
 
             if (rs.next()) {
                 idEndereco = Integer.parseInt(rs.getString("id_endereco"));
-                idFuncionario = Integer.parseInt(rs.getString("id_funcionario"));
+                idFuncionario = Integer.parseInt(rs.getString("id_paciente"));
                 idDadosBancarios = Integer.parseInt(rs.getString("numero_conta_bancaria"));
 
                 consultaFunPane.setLabelNameInput(rs.getString("nome"));
@@ -268,7 +268,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
             }
 
             // CONTATO
-            String sqlContato = "SELECT * FROM contato WHERE id_funcionario = ?";
+            String sqlContato = "SELECT * FROM contato WHERE id_paciente = ?";
             ps = conn.prepareStatement(sqlContato);
             ps.setInt(1, idFuncionario);
 
@@ -294,7 +294,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
             textFieldConsultaFun.setText("");
 
         } catch (SQLException e) {
-            System.out.println("Erro com banco de dados" + e.getMessage());
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro com banco de dados" + e.getMessage());
         } finally {
             myConnection.closeConnection(conn, ps);
         }

@@ -150,7 +150,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1099, 541));
 
         textFieldNomeFunc.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldNomeFunc.setForeground(new java.awt.Color(255, 255, 255));
+        textFieldNomeFunc.setForeground(new java.awt.Color(51, 51, 51));
         textFieldNomeFunc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do funcionário", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNomeFunc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -164,7 +164,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldNomeCpf.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldNomeCpf.setForeground(new java.awt.Color(255, 255, 255));
+        textFieldNomeCpf.setForeground(new java.awt.Color(51, 51, 51));
         textFieldNomeCpf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNomeCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -178,6 +178,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldCEPFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldCEPFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldCEPFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CEP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldCEPFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -191,6 +192,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldBairroFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldBairroFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldBairroFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bairro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldBairroFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -199,6 +201,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldNumeroFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldNumeroFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldNumeroFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNumeroFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -207,7 +210,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldDataNascimento.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldDataNascimento.setForeground(new java.awt.Color(255, 255, 255));
+        textFieldDataNascimento.setForeground(new java.awt.Color(51, 51, 51));
         textFieldDataNascimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de nascimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldDataNascimento.setCaretColor(new java.awt.Color(255, 255, 255));
         textFieldDataNascimento.setDisabledTextColor(new java.awt.Color(255, 255, 255));
@@ -233,6 +236,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldTelefoneFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldTelefoneFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldTelefoneFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefone", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldTelefoneFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -241,6 +245,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldEmailFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldEmailFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldEmailFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldEmailFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -259,6 +264,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldNomeBancoFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldNomeBancoFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldNomeBancoFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do banco", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNomeBancoFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -267,6 +273,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldAgenciaFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldAgenciaFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldAgenciaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agência", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldAgenciaFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -275,6 +282,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldSalarioFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldSalarioFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldSalarioFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldSalarioFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -283,9 +291,11 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldComplementoFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldComplementoFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldComplementoFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Complemento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
 
         textFieldRuaFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldRuaFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldRuaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rua", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldRuaFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -294,6 +304,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFieldCidadeFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFieldCidadeFun.setForeground(new java.awt.Color(51, 51, 51));
         textFieldCidadeFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldCidadeFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -321,6 +332,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         });
 
         textFiledNumeroContaFun.setBackground(new java.awt.Color(255, 255, 255));
+        textFiledNumeroContaFun.setForeground(new java.awt.Color(51, 51, 51));
         textFiledNumeroContaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número da conta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
@@ -371,74 +383,71 @@ public class AddFun extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1460, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(textFieldTelefoneFun, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(26, 26, 26)
-                                            .addComponent(textFieldEmailFun, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(299, 299, 299)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(textFieldNomeBancoFun)
-                                                .addComponent(textFieldAgenciaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(textFiledNumeroContaFun)
-                                                .addComponent(textFieldSalarioFun, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(textFieldCEPFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(textFieldCidadeFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldBairroFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(textFieldRuaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldNumeroFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldComplementoFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(comboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(comboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(textFieldNomeFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldNomeCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(452, 452, 452)
-                        .addComponent(cadastrarButtonFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(209, 209, 209)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textFieldTelefoneFun, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(26, 26, 26)
+                                                .addComponent(textFieldEmailFun, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(299, 299, 299)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(textFieldNomeBancoFun)
+                                                    .addComponent(textFieldAgenciaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(textFiledNumeroContaFun)
+                                                    .addComponent(textFieldSalarioFun, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(textFieldCEPFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(textFieldCidadeFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldBairroFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(textFieldRuaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldNumeroFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldComplementoFun, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(comboBoxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(comboBoxCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(textFieldNomeFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldNomeCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(452, 452, 452)
+                                .addComponent(cadastrarButtonFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,7 +485,7 @@ public class AddFun extends javax.swing.JInternalFrame {
                     .addComponent(textFieldNumeroFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldComplementoFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textFieldRuaFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -572,9 +581,9 @@ public class AddFun extends javax.swing.JInternalFrame {
             //=======================
             //Inserindo endereco do funcionario
             String sql = "INSERT INTO endereco "
-                    + "(cep, cidade, bairro, rua, numero, complemento)"
-                    + " VALUES"
-                    + " (?, ?, ?, ?, ?, ?)";
+            + "(cep, cidade, bairro, rua, numero, complemento)"
+            + " VALUES"
+            + " (?, ?, ?, ?, ?, ?)";
 
             st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setString(1, funcionarioCEPEndereco);
@@ -597,9 +606,9 @@ public class AddFun extends javax.swing.JInternalFrame {
             //============================
             //Inserindo dados bancarios do funcionario
             sql = "INSERT INTO dados_bancarios"
-                    + " (numero_conta, nome_banco, agencia, salario)"
-                    + " VALUES"
-                    + " (?, ?, ?, ?)";
+            + " (numero_conta, nome_banco, agencia, salario)"
+            + " VALUES"
+            + " (?, ?, ?, ?)";
             st = conn.prepareStatement(sql);
             st.setInt(1, funcionarioNumeroContaInt);
             st.setString(2, funcionarioNomeBanco);
@@ -611,11 +620,11 @@ public class AddFun extends javax.swing.JInternalFrame {
             //============================
 
             //Inserindo dados do funcionario
-            sql = "INSERT INTO funcionario"
-                    + " (id_endereco, numero_conta_bancaria, nome, cpf, data_nascimento,"
-                    + "cargo, estado_civil)"
-                    + " VALUES"
-                    + " (?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO paciente"
+            + " (id_endereco, numero_conta_bancaria, nome, cpf, data_nascimento,"
+            + "cargo, estado_civil)"
+            + " VALUES"
+            + " (?, ?, ?, ?, ?, ?, ?)";
             st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setInt(1, idEndereco);
             st.setInt(2, funcionarioNumeroContaInt);
@@ -638,9 +647,9 @@ public class AddFun extends javax.swing.JInternalFrame {
             //============================
             //ADICIONANDO CONTATO DO FUNCIONARIO
             sql = "INSERT INTO contato"
-                    + " (id_funcionario, email, telefone)"
-                    + " VALUES"
-                    + " (?, ?, ?)";
+            + " (id_paciente, email, telefone)"
+            + " VALUES"
+            + " (?, ?, ?)";
 
             st = conn.prepareStatement(sql);
             st.setInt(1, idFuncionario);
@@ -649,9 +658,10 @@ public class AddFun extends javax.swing.JInternalFrame {
             st.executeUpdate();
             st.close();
 
-            JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso");
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Funcionario cadastrado com sucesso");
+
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar..." + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao conectar..." + e.getMessage());
         } finally {
             try {
                 if (conn != null && (!conn.isClosed())) {
@@ -676,7 +686,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
                 }
             } catch (SQLException ex) {
-                System.out.println("Erro ao fechar banco de dados " + ex.getMessage());
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao fechar banco de dados " + ex.getMessage());
             }
         }
     }//GEN-LAST:event_cadastrarButtonFuncionarioActionPerformed
@@ -808,7 +818,7 @@ public class AddFun extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Erro ao acessar CEP");
+            JOptionPane.showInternalMessageDialog(getDesktopPane(),"Erro ao acessar CEP");
         }
 
     }

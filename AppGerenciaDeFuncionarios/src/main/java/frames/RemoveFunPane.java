@@ -21,11 +21,10 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     /**
      * Creates new form RemoveFunPane
      */
-    
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-    
+
     public RemoveFunPane() {
         initComponents();
         this.setBorder(null);
@@ -449,75 +448,74 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int resp = JOptionPane.showInternalConfirmDialog(getDesktopPane(),
+                "Ceteza que deseja deseja excluir o funcionario?",
+                "Confirmação",
+                JOptionPane.YES_NO_OPTION);
         
-        int resp = JOptionPane.showConfirmDialog(null,
-                    "Ceteza que deseja deseja excluir o funcionario?",
-                    "Confirmação",
-                    JOptionPane.YES_NO_OPTION);
-        
-        if(resp == 0){
-            
-            try{
-                
-                if(conn == null || conn.isClosed()){
+
+        if (resp == 0) {
+
+            try {
+
+                if (conn == null || conn.isClosed()) {
                     conn = myConnection.getConexao();
+                } else {
+                    System.out.println("Deu errado conectar");
                 }
-                else System.out.println("Deu errado conectar");
-                
+
                 String nameConsulta = labelNameInput.getText();
-             
+
                 //PEGANDO IDs DE FUNCIONARIO PARA EXCLUIR ENDERECO E DADOS_BANCARIOS
-                String sqlId = "SELECT * FROM funcionario WHERE nome = ?";
+                String sqlId = "SELECT * FROM paciente WHERE nome = ?";
                 ps = conn.prepareStatement(sqlId);
                 ps.setString(1, nameConsulta);
-                
+
                 int idEndereco = -1;
                 int idDadosBancarios = -1;
-                
+
                 rs = ps.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     idEndereco = rs.getInt("id_endereco");
                     idDadosBancarios = rs.getInt("numero_conta_bancaria");
                 }
-                
+
                 // DELETANDO FUNCIONARIO
-                String sqlDelFun = "DELETE FROM funcionario WHERE nome = ?";
+                String sqlDelFun = "DELETE FROM paciente WHERE nome = ?";
                 ps = conn.prepareStatement(sqlDelFun);
                 ps.setString(1, nameConsulta);
                 int n = ps.executeUpdate();
-                
+
                 // DELETANDO ENDERECO
                 String sqlDelEndereco = "DELETE FROM endereco WHERE id_endereco = ?";
                 ps = conn.prepareStatement(sqlDelEndereco);
                 ps.setInt(1, idEndereco);
                 int z = ps.executeUpdate();
-                
+
                 // DELETANDO DADOS BANCARIOS
                 String sqlDelDadosBancarios = "DELETE FROM dados_bancarios WHERE "
                         + "numero_conta = ?";
                 ps = conn.prepareStatement(sqlDelDadosBancarios);
                 ps.setInt(1, idDadosBancarios);
                 int y = ps.executeUpdate();
-                
-                if(n > 0 && y > 0 && z > 0){
-                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+
+                if (n > 0 && y > 0 && z > 0) {
+                    JOptionPane.showInternalMessageDialog(getDesktopPane(), "Excluido com sucesso");
+                } else {
+                    JOptionPane.showInternalMessageDialog(getDesktopPane(), "Nenhum usuário encontrado");
                 }
-                else{
-                    JOptionPane.showMessageDialog(null, "Nenhum usuário encontrado");
-                }
-                
-            }
-            catch(SQLException e){
-                System.out.println("Conexao de dados deu errado");
-            }
-            finally{
+
+            } catch (SQLException e) {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(), "Conexao de dados deu errado");
+            } finally {
                 myConnection.closeConnection(conn, ps, rs);
             }
-            
+
             this.dispose();
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public JLabel getLabelAgenciaInput() {
@@ -543,7 +541,7 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     public void setLabelCEPInput(String value) {
         labelCEPInput.setText(value);
     }
-    
+
     public JLabel getLabelCPFInput() {
         return labelCPFInput;
     }
@@ -623,7 +621,7 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     public void setLabelNumeroEnderecoInput(String value) {
         labelNumeroEnderecoInput.setText(value);
     }
-    
+
     public JLabel getLabelRuaInput() {
         return labelRuaInput;
     }
@@ -654,8 +652,8 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
 
     public void setLabelNumeroContaInput(String value) {
         labelNumeroContaInput.setText(value);
-    }    
-    
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
