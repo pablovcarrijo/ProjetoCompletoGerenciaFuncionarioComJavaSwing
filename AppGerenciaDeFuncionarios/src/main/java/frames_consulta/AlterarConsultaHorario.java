@@ -1,47 +1,73 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
+ */
 package frames_consulta;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.DayOfWeek;
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.DayOfWeek.THURSDAY;
+import static java.time.DayOfWeek.TUESDAY;
+import static java.time.DayOfWeek.WEDNESDAY;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import model.connector.myConnection;
 
-public class AddConsulta extends javax.swing.JInternalFrame {
+/**
+ *
+ * @author PabloCarrijo
+ */
+public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
+
+    /**
+     * Creates new form AlterarConsultaHorario
+     */
+    private String cpf;
+    private String nome;
+    private int crmAtual = -1; // guarda o CRM do médico selecionado
+    private String[][] datasTabela = new String[5][6];
 
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
+    private PreparedStatement ps2 = null;
+    private ResultSet rs2 = null;
 
-    private DefaultListModel<String> listModel;
-    private JList<String> sugestaoList;
-    private JScrollPane scrollPane;
-    private JPopupMenu popupSugestoes;
-
-    private int crmAtual = -1; // guarda o CRM do médico selecionado
-    private String[][] datasTabela = new String[5][6];
-
-    public AddConsulta() {
+    public AlterarConsultaHorario(String cpf) {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        configurarAutoComplete();
+
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = myConnection.getConexao();
+            }
+            String sql = "SELECT nome FROM paciente WHERE cpf = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, cpf);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                this.nome = rs.getString("nome");
+                textFieldPaciente.setText(nome);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showInternalMessageDialog(this, "Erro inesperados");
+        }
+
+        textFieldPaciente.setEditable(false);
 
         carregarEspecialidades();
 
@@ -87,8 +113,65 @@ public class AddConsulta extends javax.swing.JInternalFrame {
             }
         });
 
+        // Carrega as informações do médico e da sua especialidade
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = myConnection.getConexao();
+            }
+
+            String sql = "SELECT m.nome AS medico, e.especialidade AS especialidade "
+                    + "FROM consulta c "
+                    + "INNER JOIN agenda a ON c.id_agenda = a.id_agenda "
+                    + "INNER JOIN medico m ON a.CRM = m.CRM "
+                    + "INNER JOIN especialidade e ON m.id_especialidade = e.id_especialidade "
+                    + "INNER JOIN paciente p ON c.id_paciente = p.id_paciente "
+                    + "WHERE p.nome = ? "
+                    + "ORDER BY c.id_consulta DESC LIMIT 1";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, this.nome);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String especialidade = rs.getString("especialidade");
+                String medico = rs.getString("medico");
+
+                comboBox1.setSelectedItem(especialidade);
+                carregarMedicos(especialidade);
+                medicosList.setSelectedValue(medico, true);
+
+                // mostra agenda
+                try {
+                    if (conn == null || conn.isClosed()) {
+                        conn = myConnection.getConexao();
+                    }
+                    ps2 = conn.prepareStatement("SELECT CRM FROM medico WHERE nome = ?");
+
+                    ps2.setString(1, medico);
+                    rs2 = ps2.executeQuery();
+                    if (rs2.next()) {
+                        crmAtual = rs2.getInt("CRM");
+                        mostrarAgendaMedico(crmAtual);
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showInternalMessageDialog(this, "Erro inesperado");
+                } finally {
+                    myConnection.closeConnection(conn, ps2, rs2);
+                }
+            } else {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                        "Paciente " + nome + " não possui consultas cadastradas.");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao buscar dados da consulta: " + e.getMessage());
+        } finally {
+            myConnection.closeConnection(conn, ps, rs);
+        }
+
         // pinta a tabela de verde/vermelho
-        tableHorarios.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        tableHorarios.setDefaultRenderer(Object.class,
+                 new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
@@ -111,12 +194,15 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                 }
                 return c;
             }
-        });
+        }
+        );
 
-        // clique no horário
-        tableHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        // clique no horário para agendar o horário
+        tableHorarios.addMouseListener(
+                new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseClicked(java.awt.event.MouseEvent evt
+            ) {
                 int row = tableHorarios.getSelectedRow();
                 int col = tableHorarios.getSelectedColumn();
 
@@ -136,13 +222,15 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                     }
                 }
             }
-        });
-    }
+        }
+        );
 
-    //---------------------------------------------
-    //CÓDIGO RELACIONADO A PESQUISA DE ESPECIALIDADE E MÉDICO
-    //---------------------------------------------   
+    }
+    //-------------------------------
+    // CARREGA ESPECIALIDADE E MÉDICOS NO LIST E NO COMBO BOX
+    //-------------------------------
     // carregar especialidades no comboBox
+
     private void carregarEspecialidades() {
         try {
 
@@ -163,7 +251,7 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         }
     }
 
-    // carrega médicos no list
+    // carrega os médicos no list
     private void carregarMedicos(String especialidade) {
         DefaultListModel<String> model = new DefaultListModel<>();
         medicosList.setModel(model);
@@ -190,79 +278,10 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         }
     }
 
-    //---------------------------------------------
-    //CÓDIGOS RELACIONADOS A TABELA DE CONSULTAR
-    //---------------------------------------------
-    // agenda consulta no banco
-    private void agendarConsulta(int crm, int row, int col) {
-        try {
-            String hora = tableHorarios.getValueAt(row, 0).toString();
-            String dataSelecionada = datasTabela[row][col]; // <- pega a data da célula clicada
-
-            if (dataSelecionada == null) {
-                JOptionPane.showInternalMessageDialog(getDesktopPane(),
-                        "Não foi possível identificar a data deste horário.");
-                return;
-            }
-
-            if (conn == null || conn.isClosed()) {
-                conn = myConnection.getConexao();
-            }
-
-            // agora busca pelo CRM + hora + data
-            String sql = "SELECT a.id_agenda FROM agenda a "
-                    + "WHERE a.CRM = ? AND a.hora_agenda = ? AND a.data_agenda = ?";
-
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, crm);
-            ps.setString(2, hora + ":00");
-            ps.setString(3, dataSelecionada);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                int idAgenda = rs.getInt("id_agenda");
-                String paciente = textPaciente.getText();
-                int idPaciente = -1;
-
-                PreparedStatement stmtPac = conn.prepareStatement(
-                        "SELECT id_paciente FROM paciente WHERE nome = ?");
-                stmtPac.setString(1, paciente);
-                ResultSet rsPac = stmtPac.executeQuery();
-                if (rsPac.next()) {
-                    idPaciente = rsPac.getInt("id_paciente");
-                }
-
-                if (idPaciente != -1) {
-                    // insere consulta
-                    PreparedStatement stmtInsert = conn.prepareStatement(
-                            "INSERT INTO consulta (id_agenda, id_paciente) VALUES (?, ?)");
-                    stmtInsert.setInt(1, idAgenda);
-                    stmtInsert.setInt(2, idPaciente);
-                    stmtInsert.executeUpdate();
-
-                    // marca horário como ocupado
-                    PreparedStatement stmtUpdate = conn.prepareStatement(
-                            "UPDATE agenda SET disponivel = 0 WHERE id_agenda = ?");
-                    stmtUpdate.setInt(1, idAgenda);
-                    stmtUpdate.executeUpdate();
-
-                    JOptionPane.showInternalMessageDialog(getDesktopPane(),
-                            "Consulta agendada com sucesso!");
-                } else {
-                    JOptionPane.showInternalMessageDialog(getDesktopPane(),
-                            "Paciente não encontrado.");
-                }
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showInternalMessageDialog(getDesktopPane(),
-                    "Erro ao agendar: " + e.getMessage());
-        } finally {
-            myConnection.closeConnection(conn, ps, rs);
-        }
-    }
-
-    // carregar agenda do médico
+    //-------------------------------
+    // CARREGA AGENDA DO MÉDICO SELECIONADO E FAZ AGENDA PARA CONSULTA
+    //-------------------------------
+    // Carrega a agenda do médico
     private void mostrarAgendaMedico(int crm) {
         try {
             if (conn == null || conn.isClosed()) {
@@ -326,121 +345,101 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         }
     }
 
-    //---------------------------------------------
-    //CÓDIGO RELACIONADO AO AUTOCOMPLETE ENQUANTO DIGITA O NOME
-    //---------------------------------------------
-    private void configurarAutoComplete() {
-        listModel = new DefaultListModel<>();
-        sugestaoList = new JList<>(listModel);
-        scrollPane = new JScrollPane(sugestaoList);
+    // Realiza a agenda da consulta
+    private void agendarConsulta(int crm, int row, int col) {
+        try {
+            String hora = tableHorarios.getValueAt(row, 0).toString();
+            String dataSelecionada = datasTabela[row][col]; // <- pega a data da célula clicada
 
-        popupSugestoes = new JPopupMenu();
-        popupSugestoes.setBorder(null);
-        popupSugestoes.add(scrollPane);
-        scrollPane.setPreferredSize(new java.awt.Dimension(
-                textPaciente.getWidth(), 120
-        ));
-
-        textPaciente.getDocument().addDocumentListener(new DocumentListener() {
-            public void insertUpdate(DocumentEvent e) {
-                buscarSugestoes();
+            if (dataSelecionada == null) {
+                JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                        "Não foi possível identificar a data deste horário.");
+                return;
             }
 
-            public void removeUpdate(DocumentEvent e) {
-                buscarSugestoes();
+            if (conn == null || conn.isClosed()) {
+                conn = myConnection.getConexao();
             }
 
-            public void changedUpdate(DocumentEvent e) {
-                buscarSugestoes();
-            }
+            // agora busca pelo CRM + hora + data
+            String sql = "SELECT a.id_agenda FROM agenda a "
+                    + "WHERE a.CRM = ? AND a.hora_agenda = ? AND a.data_agenda = ?";
 
-            private void buscarSugestoes() {
-                String texto = textPaciente.getText().trim();
-                if (texto.isEmpty()) {
-                    popupSugestoes.setVisible(false);
-                    return;
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, crm);
+            ps.setString(2, hora + ":00");
+            ps.setString(3, dataSelecionada);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int idAgenda = rs.getInt("id_agenda");
+                String paciente = textFieldPaciente.getText();
+                int idPaciente = -1;
+
+                PreparedStatement stmtPac = conn.prepareStatement(
+                        "SELECT id_paciente FROM paciente WHERE nome = ?");
+                stmtPac.setString(1, nome);
+                ResultSet rsPac = stmtPac.executeQuery();
+                if (rsPac.next()) {
+                    idPaciente = rsPac.getInt("id_paciente");
                 }
 
-                List<String> sugestoes = buscarNoBanco(texto);
-                atualizarSugestoes(sugestoes);
-            }
-        });
+                if (idPaciente != -1) {
+                    // insere consulta
+                    PreparedStatement stmtInsert = conn.prepareStatement(
+                            "INSERT INTO consulta (id_agenda, id_paciente) VALUES (?, ?)");
+                    stmtInsert.setInt(1, idAgenda);
+                    stmtInsert.setInt(2, idPaciente);
+                    stmtInsert.executeUpdate();
 
-        sugestaoList.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    String selecionado = sugestaoList.getSelectedValue();
-                    textPaciente.setText(selecionado);
-                    popupSugestoes.setVisible(false);
+                    // marca horário como ocupado
+                    PreparedStatement stmtUpdate = conn.prepareStatement(
+                            "UPDATE agenda SET disponivel = 0 WHERE id_agenda = ?");
+                    stmtUpdate.setInt(1, idAgenda);
+                    stmtUpdate.executeUpdate();
+
+                    JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                            "Consulta agendada com sucesso!");
+                } else {
+                    JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                            "Paciente não encontrado.");
                 }
             }
-        });
-    }
 
-    private void atualizarSugestoes(List<String> sugestoes) {
-        listModel.clear();
-        if (!sugestoes.isEmpty()) {
-            for (String s : sugestoes) {
-                listModel.addElement(s);
-            }
-
-            int rowHeight = sugestaoList.getFixedCellHeight() > 0 ? sugestaoList.getFixedCellHeight() : 40;
-            int altura = Math.min(sugestoes.size() * rowHeight, 150);
-            scrollPane.setPreferredSize(new java.awt.Dimension(textPaciente.getWidth(), altura));
-
-            popupSugestoes.show(textPaciente, 0, textPaciente.getHeight());
-            textPaciente.requestFocusInWindow();
-        } else {
-            popupSugestoes.setVisible(false);
-        }
-    }
-
-    private List<String> buscarNoBanco(String texto) {
-        List<String> nomes = new ArrayList<>();
-        try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
-
-            stmt.setString(1, texto + "%");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                nomes.add(rs.getString("nome"));
-            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                    "Erro ao agendar: " + e.getMessage());
         } finally {
             myConnection.closeConnection(conn, ps, rs);
         }
-        return nomes;
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        textPaciente = new javax.swing.JTextField();
-        comboBox1 = new javax.swing.JComboBox<>();
+        textFieldPaciente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        comboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         medicosList = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableHorarios = new javax.swing.JTable();
 
-        jLabel1.setText("Nome do paciente");
+        jLabel1.setText("Paciente");
 
-        comboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        textFieldPaciente.setBackground(new java.awt.Color(102, 102, 102));
+        textFieldPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        textFieldPaciente.setCaretColor(new java.awt.Color(255, 255, 255));
 
         jLabel2.setText("Especialidade");
 
+        comboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+
         medicosList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Médicos", " " };
+            String[] strings = { "Medicos" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -463,56 +462,54 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         tableHorarios.setShowGrid(true);
         jScrollPane2.setViewportView(tableHorarios);
 
-        javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
-        desktopPane.setLayout(desktopPaneLayout);
-        desktopPaneLayout.setHorizontalGroup(
-            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(desktopPaneLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(desktopPaneLayout.createSequentialGroup()
-                        .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(textPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(123, 123, 123)
-                        .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(145, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(219, Short.MAX_VALUE))
+                        .addGap(155, 155, 155)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
-        desktopPaneLayout.setVerticalGroup(
-            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(desktopPaneLayout.createSequentialGroup()
-                .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(desktopPaneLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(desktopPaneLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(79, 79, 79)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -521,13 +518,13 @@ public class AddConsulta extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBox1;
-    private javax.swing.JPanel desktopPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> medicosList;
     private javax.swing.JTable tableHorarios;
-    private javax.swing.JTextField textPaciente;
+    private javax.swing.JTextField textFieldPaciente;
     // End of variables declaration//GEN-END:variables
 }
