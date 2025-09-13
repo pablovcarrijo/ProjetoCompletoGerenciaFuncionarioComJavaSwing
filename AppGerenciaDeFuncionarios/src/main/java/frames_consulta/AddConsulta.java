@@ -135,7 +135,11 @@ public class AddConsulta extends javax.swing.JInternalFrame {
             }
         });
     }
-
+    
+    //---------------------------------------------
+    //CÓDIGO RELACIONADO A PESQUISA DE ESPECIALIDADE E MÉDICO
+    //---------------------------------------------   
+    
     // carregar especialidades no comboBox
     private void carregarEspecialidades() {
         try {
@@ -155,70 +159,7 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         }
     }
 
-    // carregar agenda do médico
-    private void mostrarAgendaMedico(int crm) {
-        try {
-            if (conn == null || conn.isClosed()) {
-                conn = myConnection.getConexao();
-            }
-
-            String sql = "SELECT id_agenda, data_agenda, hora_agenda, disponivel "
-                    + "FROM agenda "
-                    + "WHERE CRM = ? "
-                    + "ORDER BY data_agenda, hora_agenda";
-
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, crm);
-            rs = ps.executeQuery();
-
-            DefaultTableModel model = (DefaultTableModel) tableHorarios.getModel();
-
-            // limpa antes do while
-            for (int i = 0; i < model.getRowCount(); i++) {
-                for (int j = 1; j < model.getColumnCount(); j++) {
-                    model.setValueAt(null, i, j);
-                }
-            }
-
-            while (rs.next()) {
-                String hora = rs.getString("hora_agenda").substring(0, 5);
-                String data = rs.getString("data_agenda");
-                int status = rs.getInt("disponivel");
-
-                LocalDate date = LocalDate.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                DayOfWeek dow = date.getDayOfWeek();
-
-                int col = switch (dow) {
-                    case MONDAY ->
-                        1;
-                    case TUESDAY ->
-                        2;
-                    case WEDNESDAY ->
-                        3;
-                    case THURSDAY ->
-                        4;
-                    case FRIDAY ->
-                        5;
-                    default ->
-                        -1;
-                };
-
-                if (col != -1) {
-                    for (int i = 0; i < model.getRowCount(); i++) {
-                        if (hora.equals(model.getValueAt(i, 0))) {
-                            model.setValueAt(status, i, col);
-                            datasTabela[i][col] = data; // <- salva a data da céula
-                        }
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao carregar agenda: " + e.getMessage());
-        } finally {
-            myConnection.closeConnection(conn, ps, rs);
-        }
-    }
-
+    // carrega médicos no list
     private void carregarMedicos(String especialidade) {
         DefaultListModel<String> model = new DefaultListModel<>();
         medicosList.setModel(model);
@@ -243,6 +184,10 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         }
     }
 
+    //---------------------------------------------
+    //CÓDIGOS RELACIONADOS A TABELA DE CONSULTAR
+    //---------------------------------------------
+    
     // agenda consulta no banco
     private void agendarConsulta(int crm, int row, int col) {
         try {
@@ -309,7 +254,75 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                     "Erro ao agendar: " + e.getMessage());
         }
     }
+    
+    // carregar agenda do médico
+    private void mostrarAgendaMedico(int crm) {
+        try {
+            if (conn == null || conn.isClosed()) {
+                conn = myConnection.getConexao();
+            }
 
+            String sql = "SELECT id_agenda, data_agenda, hora_agenda, disponivel "
+                    + "FROM agenda "
+                    + "WHERE CRM = ? "
+                    + "ORDER BY data_agenda, hora_agenda";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, crm);
+            rs = ps.executeQuery();
+
+            DefaultTableModel model = (DefaultTableModel) tableHorarios.getModel();
+
+            // limpa antes do while
+            for (int i = 0; i < model.getRowCount(); i++) {
+                for (int j = 1; j < model.getColumnCount(); j++) {
+                    model.setValueAt(null, i, j);
+                }
+            }
+
+            while (rs.next()) {
+                String hora = rs.getString("hora_agenda").substring(0, 5);
+                String data = rs.getString("data_agenda");
+                int status = rs.getInt("disponivel");
+
+                LocalDate date = LocalDate.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                DayOfWeek dow = date.getDayOfWeek();
+
+                int col = switch (dow) {
+                    case MONDAY ->
+                        1;
+                    case TUESDAY ->
+                        2;
+                    case WEDNESDAY ->
+                        3;
+                    case THURSDAY ->
+                        4;
+                    case FRIDAY ->
+                        5;
+                    default ->
+                        -1;
+                };
+
+                if (col != -1) {
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        if (hora.equals(model.getValueAt(i, 0))) {
+                            model.setValueAt(status, i, col);
+                            datasTabela[i][col] = data; // <- salva a data da céula
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao carregar agenda: " + e.getMessage());
+        } finally {
+            myConnection.closeConnection(conn, ps, rs);
+        }
+    }
+
+    //---------------------------------------------
+    //CÓDIGO RELACIONADO AO AUTOCOMPLETE ENQUANTO DIGITA O NOME
+    //---------------------------------------------
+    
     private void configurarAutoComplete() {
         listModel = new DefaultListModel<>();
         sugestaoList = new JList<>(listModel);
