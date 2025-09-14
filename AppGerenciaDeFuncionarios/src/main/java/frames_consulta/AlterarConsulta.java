@@ -164,7 +164,7 @@ public class AlterarConsulta extends javax.swing.JInternalFrame {
         buscaBotao = new javax.swing.JButton();
         desktopPaneHorarios = new javax.swing.JDesktopPane();
 
-        jLabel1.setText("Digite o nome do paciente");
+        jLabel1.setText("Nome ou cpf do paciente");
 
         textFieldBuscaNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

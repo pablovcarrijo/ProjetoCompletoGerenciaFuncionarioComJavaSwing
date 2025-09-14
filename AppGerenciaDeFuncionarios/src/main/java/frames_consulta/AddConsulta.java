@@ -493,7 +493,7 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableHorarios = new javax.swing.JTable();
 
-        jLabel1.setText("Nome do paciente");
+        jLabel1.setText("Nome ou cpf do paciente");
 
         comboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
