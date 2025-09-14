@@ -36,6 +36,8 @@ public class AddConsulta extends javax.swing.JInternalFrame {
 
     private int crmAtual = -1; // guarda o CRM do médico selecionado
     private String[][] datasTabela = new String[5][6];
+    private int[][] pacientesTabela = new int[5][6];
+    private String nomeSelecionado = null;
 
     public AddConsulta() {
         initComponents();
@@ -99,11 +101,20 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                 if (column > 0 && value != null) {
                     int status = Integer.parseInt(value.toString());
                     if (status == 1) {
-                        c.setBackground(java.awt.Color.GREEN);
+                        c.setBackground(java.awt.Color.GREEN); // disponível
                         c.setForeground(java.awt.Color.GREEN);
                     } else {
-                        c.setBackground(java.awt.Color.RED);
-                        c.setForeground(java.awt.Color.RED);
+                        // ocupado: vermelho se for o paciente atual, cinza se for outro
+                        int idPacienteCelula = pacientesTabela[row][column];
+                        int idPacienteAtual = getIdPacienteAtual();
+
+                        if (idPacienteCelula == idPacienteAtual) {
+                            c.setBackground(java.awt.Color.RED);
+                            c.setForeground(java.awt.Color.RED);
+                        } else {
+                            c.setBackground(java.awt.Color.LIGHT_GRAY);
+                            c.setForeground(java.awt.Color.LIGHT_GRAY);
+                        }
                     }
                 } else {
                     c.setBackground(java.awt.Color.WHITE);
@@ -284,10 +295,11 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT id_agenda, data_agenda, hora_agenda, disponivel "
-                    + "FROM agenda "
-                    + "WHERE CRM = ? "
-                    + "ORDER BY data_agenda, hora_agenda";
+            String sql = "SELECT a.id_agenda, a.data_agenda, a.hora_agenda, a.disponivel, c.id_paciente "
+                    + "FROM agenda a "
+                    + "LEFT JOIN consulta c ON a.id_agenda = c.id_agenda "
+                    + "WHERE a.CRM = ? "
+                    + "ORDER BY a.data_agenda, a.hora_agenda";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, crm);
@@ -299,6 +311,8 @@ public class AddConsulta extends javax.swing.JInternalFrame {
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (int j = 1; j < model.getColumnCount(); j++) {
                     model.setValueAt(null, i, j);
+                    datasTabela[i][j] = null;
+                    pacientesTabela[i][j] = 0;
                 }
             }
 
@@ -306,6 +320,7 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                 String hora = rs.getString("hora_agenda").substring(0, 5);
                 String data = rs.getString("data_agenda");
                 int status = rs.getInt("disponivel");
+                int idPacienteConsulta = rs.getInt("id_paciente");
 
                 LocalDate date = LocalDate.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 DayOfWeek dow = date.getDayOfWeek();
@@ -329,7 +344,8 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                     for (int i = 0; i < model.getRowCount(); i++) {
                         if (hora.equals(model.getValueAt(i, 0))) {
                             model.setValueAt(status, i, col);
-                            datasTabela[i][col] = data; // <- salva a data da céula
+                            datasTabela[i][col] = data;
+                            pacientesTabela[i][col] = idPacienteConsulta; // aqui salva
                         }
                     }
                 }
@@ -339,6 +355,19 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         } finally {
             myConnection.closeConnection(conn, ps, rs);
         }
+    }
+
+    private int getIdPacienteAtual() {
+        try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement("SELECT id_paciente FROM paciente WHERE nome = ?")) {
+            stmt.setString(1, textPaciente.getText());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id_paciente");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     //---------------------------------------------
@@ -386,11 +415,23 @@ public class AddConsulta extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selecionado = sugestaoList.getSelectedValue();
-                    textPaciente.setText(selecionado);
-                    popupSugestoes.setVisible(false);
+                    if (selecionado != null) {
+                        // "Nome - CPF"
+                        String[] partes = selecionado.split(" - ");
+                        if (partes.length == 2) {
+                            textPaciente.setText(partes[0]); // mostra só o nome
+                            nomeSelecionado = partes[0];     // guarda também o nome
+                        } else {
+                            textPaciente.setText(selecionado);
+                            nomeSelecionado = selecionado;
+                        }
+
+                        popupSugestoes.setVisible(false);
+                    }
                 }
             }
         });
+
     }
 
     private void atualizarSugestoes(List<String> sugestoes) {
@@ -414,12 +455,16 @@ public class AddConsulta extends javax.swing.JInternalFrame {
     private List<String> buscarNoBanco(String texto) {
         List<String> nomes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
+                "SELECT nome, cpf FROM paciente WHERE nome LIKE ? OR cpf LIKE ? LIMIT 10")) {
 
-            stmt.setString(1, texto + "%");
+            stmt.setString(1, texto + "%");  // pesquisa por nome
+            stmt.setString(2, texto + "%");  // pesquisa também por CPF
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
-                nomes.add(rs.getString("nome"));
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                nomes.add(nome + " - " + cpf); // concatena nome + cpf
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -489,8 +534,8 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                     .addGroup(desktopPaneLayout.createSequentialGroup()
                         .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(textPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(123, 123, 123)
+                            .addComponent(textPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
                         .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))

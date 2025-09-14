@@ -92,11 +92,20 @@ public class AlterarConsulta extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selecionado = sugestaoList.getSelectedValue();
-                    textFieldBuscaNome.setText(selecionado);
-                    popupSugestoes.setVisible(false);
+                    if (selecionado != null) {
+                        // "Nome - CPF"
+                        String[] partes = selecionado.split(" - ");
+                        if (partes.length == 2) {
+                            textFieldBuscaNome.setText(partes[1]); // só CPF
+                        } else {
+                            textFieldBuscaNome.setText(selecionado);
+                        }
+                        popupSugestoes.setVisible(false);
+                    }
                 }
             }
         });
+
     }
 
     private void atualizarSugestoes(List<String> sugestoes) {
@@ -118,21 +127,25 @@ public class AlterarConsulta extends javax.swing.JInternalFrame {
     }
 
     private List<String> buscarNoBanco(String texto) {
-        List<String> cpfs = new ArrayList<>();
+        List<String> nomes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT cpf FROM paciente WHERE cpf LIKE ? LIMIT 10")) {
+                "SELECT nome, cpf FROM paciente WHERE nome LIKE ? OR cpf LIKE ? LIMIT 10")) {
 
-            stmt.setString(1, texto + "%");
+            stmt.setString(1, texto + "%");  // pesquisa por nome
+            stmt.setString(2, texto + "%");  // pesquisa também por CPF
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
-                cpfs.add(rs.getString("cpf"));
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                nomes.add(nome + " - " + cpf); // concatena nome + cpf
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             myConnection.closeConnection(conn, ps, rs);
         }
-        return cpfs;
+        return nomes;
     }
 
     /**
@@ -174,11 +187,11 @@ public class AlterarConsulta extends javax.swing.JInternalFrame {
                 .addGap(55, 55, 55)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(textFieldBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textFieldBuscaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(buscaBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addContainerGap(643, Short.MAX_VALUE))
+                .addContainerGap(545, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -38,6 +38,7 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
     private String nome;
     private int crmAtual = -1; // guarda o CRM do médico selecionado
     private String[][] datasTabela = new String[5][6];
+    private int[][] pacientesTabela = new int[5][6]; // guarda id_paciente de cada célula
 
     private Connection conn = null;
     private PreparedStatement ps = null;
@@ -170,32 +171,39 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
         }
 
         // pinta a tabela de verde/vermelho
-        tableHorarios.setDefaultRenderer(Object.class,
-                new DefaultTableCellRenderer() {
+        tableHorarios.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
 
-                Component c = super.getTableCellRendererComponent(
-                        table, value, isSelected, hasFocus, row, column);
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
                 if (column > 0 && value != null) {
                     int status = Integer.parseInt(value.toString());
+
                     if (status == 1) {
-                        c.setBackground(java.awt.Color.GREEN);
-                        c.setForeground(java.awt.Color.GREEN);
+                        // Disponível -> verde
+                        c.setBackground(Color.GREEN);
+                        c.setForeground(Color.GREEN);
                     } else {
-                        c.setBackground(java.awt.Color.RED);
-                        c.setForeground(java.awt.Color.RED);
+                        // Ocupado -> vermelho se for o paciente atual, cinza se for outro
+                        int idPacienteCelula = pacientesTabela[row][column];
+                        if (idPacienteCelula == getIdPacienteAtual()) {
+                            c.setBackground(Color.RED);   // consulta do paciente pesquisado
+                            c.setForeground(Color.RED);
+                        } else {
+                            c.setBackground(Color.LIGHT_GRAY); // consulta de outro paciente
+                            c.setForeground(Color.LIGHT_GRAY);
+                        }
                     }
                 } else {
-                    c.setBackground(java.awt.Color.WHITE);
-                    c.setForeground(java.awt.Color.BLACK);
+                    // Cabeçalho (coluna de horas)
+                    c.setBackground(Color.WHITE);
+                    c.setForeground(Color.BLACK);
                 }
                 return c;
             }
-        }
-        );
+        });
 
         // clique no horário para agendar o horário
         tableHorarios.addMouseListener(
@@ -288,10 +296,11 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT id_agenda, data_agenda, hora_agenda, disponivel "
-                    + "FROM agenda "
-                    + "WHERE CRM = ? "
-                    + "ORDER BY data_agenda, hora_agenda";
+            String sql = "SELECT a.id_agenda, a.data_agenda, a.hora_agenda, a.disponivel, c.id_paciente "
+                    + "FROM agenda a "
+                    + "LEFT JOIN consulta c ON a.id_agenda = c.id_agenda "
+                    + "WHERE a.CRM = ? "
+                    + "ORDER BY a.data_agenda, a.hora_agenda";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, crm);
@@ -303,6 +312,8 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
             for (int i = 0; i < model.getRowCount(); i++) {
                 for (int j = 1; j < model.getColumnCount(); j++) {
                     model.setValueAt(null, i, j);
+                    datasTabela[i][j] = null;
+                    pacientesTabela[i][j] = 0; // limpa também os pacientes
                 }
             }
 
@@ -310,6 +321,7 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
                 String hora = rs.getString("hora_agenda").substring(0, 5);
                 String data = rs.getString("data_agenda");
                 int status = rs.getInt("disponivel");
+                int idPacienteConsulta = rs.getInt("id_paciente"); // 0 se não houver consulta
 
                 LocalDate date = LocalDate.parse(data, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 DayOfWeek dow = date.getDayOfWeek();
@@ -333,11 +345,13 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
                     for (int i = 0; i < model.getRowCount(); i++) {
                         if (hora.equals(model.getValueAt(i, 0))) {
                             model.setValueAt(status, i, col);
-                            datasTabela[i][col] = data; // <- salva a data da céula
+                            datasTabela[i][col] = data;
+                            pacientesTabela[i][col] = idPacienteConsulta; // <-- agora preenche
                         }
                     }
                 }
             }
+
         } catch (SQLException e) {
             JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao carregar agenda: " + e.getMessage());
         } finally {
@@ -458,6 +472,19 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
             // Fecha recursos (boa prática)
             myConnection.closeConnection(conn, ps, rs);
         }
+    }
+
+    private int getIdPacienteAtual() {
+        try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement("SELECT id_paciente FROM paciente WHERE nome = ?")) {
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id_paciente");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 
     @SuppressWarnings("unchecked")
