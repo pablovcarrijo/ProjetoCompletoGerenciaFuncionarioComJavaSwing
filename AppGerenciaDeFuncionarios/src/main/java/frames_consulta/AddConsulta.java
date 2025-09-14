@@ -232,6 +232,21 @@ public class AddConsulta extends javax.swing.JInternalFrame {
                     idPaciente = rsPac.getInt("id_paciente");
                 }
 
+                //Verifica se o paciente já tem consulta com o médico
+                PreparedStatement stmtCheck = conn.prepareStatement(
+                        "SELECT COUNT(*) FROM consulta c "
+                        + "JOIN agenda a ON c.id_agenda = a.id_agenda "
+                        + "WHERE c.id_paciente = ? AND a.CRM = ?");
+                stmtCheck.setInt(1, idPaciente);
+                stmtCheck.setInt(2, crm); // crm do médico selecionado
+                ResultSet rsCheck = stmtCheck.executeQuery();
+
+                if (rsCheck.next() && rsCheck.getInt(1) > 0) {
+                    JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                            "Este paciente já possui uma consulta marcada com este médico.");
+                    return; // cancela o agendamento
+                }
+
                 if (idPaciente != -1) {
                     // insere consulta
                     PreparedStatement stmtInsert = conn.prepareStatement(

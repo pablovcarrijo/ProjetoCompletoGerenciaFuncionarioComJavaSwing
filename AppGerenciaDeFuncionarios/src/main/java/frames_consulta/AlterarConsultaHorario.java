@@ -171,7 +171,7 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
 
         // pinta a tabela de verde/vermelho
         tableHorarios.setDefaultRenderer(Object.class,
-                 new DefaultTableCellRenderer() {
+                new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
@@ -345,39 +345,43 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
         }
     }
 
-    // Realiza a agenda da consulta
     private void agendarConsulta(int crm, int row, int col) {
         try {
+            // Pega a hora da linha da tabela (coluna 0 sempre guarda a hora, ex: "08:00")
             String hora = tableHorarios.getValueAt(row, 0).toString();
-            String dataSelecionada = datasTabela[row][col]; // <- pega a data da célula clicada
 
+            // Pega a data correspondente à célula clicada
+            String dataSelecionada = datasTabela[row][col];
+
+            // Se a célula não tiver data, não é possível marcar
             if (dataSelecionada == null) {
                 JOptionPane.showInternalMessageDialog(getDesktopPane(),
                         "Não foi possível identificar a data deste horário.");
                 return;
             }
 
+            // Garante que a conexão está aberta
             if (conn == null || conn.isClosed()) {
                 conn = myConnection.getConexao();
             }
 
-            // agora busca pelo CRM + hora + data
+            // 1. Busca o id_agenda do horário selecionado (data + hora + médico)
             String sql = "SELECT a.id_agenda FROM agenda a "
                     + "WHERE a.CRM = ? AND a.hora_agenda = ? AND a.data_agenda = ?";
-
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, crm);
-            ps.setString(2, hora + ":00");
-            ps.setString(3, dataSelecionada);
+            ps.setInt(1, crm);                // médico atual
+            ps.setString(2, hora + ":00");    // hora formatada
+            ps.setString(3, dataSelecionada); // data
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                int idAgenda = rs.getInt("id_agenda");
-                String paciente = textFieldPaciente.getText();
-                int idPaciente = -1;
+                int idAgendaNovo = rs.getInt("id_agenda"); // novo horário a ser marcado
 
+                // 2. Busca o id_paciente pelo nome do paciente
+                int idPaciente = -1;
                 PreparedStatement stmtPac = conn.prepareStatement(
-                        "SELECT id_paciente FROM paciente WHERE nome = ?");
+                        "SELECT id_paciente FROM paciente WHERE nome = ?"
+                );
                 stmtPac.setString(1, nome);
                 ResultSet rsPac = stmtPac.executeQuery();
                 if (rsPac.next()) {
@@ -385,31 +389,73 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
                 }
 
                 if (idPaciente != -1) {
-                    // insere consulta
-                    PreparedStatement stmtInsert = conn.prepareStatement(
-                            "INSERT INTO consulta (id_agenda, id_paciente) VALUES (?, ?)");
-                    stmtInsert.setInt(1, idAgenda);
-                    stmtInsert.setInt(2, idPaciente);
-                    stmtInsert.executeUpdate();
+                    // 3. Descobre a consulta atual desse paciente com este médico
+                    int idConsultaAtual = -1;
+                    int idAgendaAntigo = -1;
 
-                    // marca horário como ocupado
-                    PreparedStatement stmtUpdate = conn.prepareStatement(
-                            "UPDATE agenda SET disponivel = 0 WHERE id_agenda = ?");
-                    stmtUpdate.setInt(1, idAgenda);
-                    stmtUpdate.executeUpdate();
+                    PreparedStatement stmtBuscaConsulta = conn.prepareStatement(
+                            "SELECT c.id_consulta, c.id_agenda "
+                            + "FROM consulta c "
+                            + "JOIN agenda a ON c.id_agenda = a.id_agenda "
+                            + "WHERE c.id_paciente = ? AND a.CRM = ? "
+                            + "ORDER BY c.id_consulta DESC LIMIT 1"
+                    );
+                    stmtBuscaConsulta.setInt(1, idPaciente); // paciente
+                    stmtBuscaConsulta.setInt(2, crm);        // médico
+                    ResultSet rsConsulta = stmtBuscaConsulta.executeQuery();
 
+                    if (rsConsulta.next()) {
+                        idConsultaAtual = rsConsulta.getInt("id_consulta"); // consulta específica
+                        idAgendaAntigo = rsConsulta.getInt("id_agenda");   // horário antigo
+                    }
+
+                    // Se não achou nenhuma consulta, não dá para alterar
+                    if (idConsultaAtual == -1) {
+                        JOptionPane.showInternalMessageDialog(getDesktopPane(),
+                                "Nenhuma consulta encontrada para este paciente neste médico.");
+                        return;
+                    }
+
+                    // 4. Atualiza a consulta para o novo horário
+                    PreparedStatement stmtUpdateConsulta = conn.prepareStatement(
+                            "UPDATE consulta SET id_agenda = ? WHERE id_consulta = ?"
+                    );
+                    stmtUpdateConsulta.setInt(1, idAgendaNovo);   // novo horário
+                    stmtUpdateConsulta.setInt(2, idConsultaAtual); // consulta exata
+                    stmtUpdateConsulta.executeUpdate();
+
+                    // 5. Libera o horário antigo (fica disponível novamente)
+                    if (idAgendaAntigo != -1) {
+                        PreparedStatement stmtLibera = conn.prepareStatement(
+                                "UPDATE agenda SET disponivel = 1 WHERE id_agenda = ?"
+                        );
+                        stmtLibera.setInt(1, idAgendaAntigo);
+                        stmtLibera.executeUpdate();
+                    }
+
+                    // 6. Ocupa o novo horário (marca como indisponível)
+                    PreparedStatement stmtOcupar = conn.prepareStatement(
+                            "UPDATE agenda SET disponivel = 0 WHERE id_agenda = ?"
+                    );
+                    stmtOcupar.setInt(1, idAgendaNovo);
+                    stmtOcupar.executeUpdate();
+
+                    // 7. Mensagem de sucesso
                     JOptionPane.showInternalMessageDialog(getDesktopPane(),
-                            "Consulta agendada com sucesso!");
+                            "Consulta alterada com sucesso!");
                 } else {
+                    // Caso o paciente não seja encontrado
                     JOptionPane.showInternalMessageDialog(getDesktopPane(),
                             "Paciente não encontrado.");
                 }
             }
 
         } catch (SQLException e) {
+            // Trata qualquer erro de SQL
             JOptionPane.showInternalMessageDialog(getDesktopPane(),
-                    "Erro ao agendar: " + e.getMessage());
+                    "Erro ao alterar consulta: " + e.getMessage());
         } finally {
+            // Fecha recursos (boa prática)
             myConnection.closeConnection(conn, ps, rs);
         }
     }
