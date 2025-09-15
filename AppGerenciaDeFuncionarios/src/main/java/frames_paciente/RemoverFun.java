@@ -94,8 +94,16 @@ public class RemoverFun extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selecionado = sugestaoList.getSelectedValue();
-                    textFieldUsuarioDemitir.setText(selecionado);
-                    popupSugestoes.setVisible(false);
+                    if (selecionado != null) {
+                        // Divide em nome e cpf
+                        String[] partes = selecionado.split(" - ");
+                        if (partes.length == 2) {
+                            textFieldUsuarioDemitir.setText(partes[1]); // coloca só o CPF no campo
+                        } else {
+                            textFieldUsuarioDemitir.setText(selecionado);
+                        }
+                        popupSugestoes.setVisible(false);
+                    }
                 }
             }
         });
@@ -128,19 +136,23 @@ public class RemoverFun extends javax.swing.JInternalFrame {
 
     //  Consulta no banco para autocomplete
     private List<String> buscarNoBanco(String texto) {
-        List<String> nomes = new ArrayList<>();
+        List<String> sugestoes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
+                "SELECT nome, cpf FROM paciente WHERE nome LIKE ? OR cpf LIKE ? LIMIT 10")) {
 
-            stmt.setString(1, texto + "%");
+            stmt.setString(1, texto + "%"); // busca por nome
+            stmt.setString(2, texto + "%"); // busca também por cpf
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
-                nomes.add(rs.getString("nome"));
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                sugestoes.add(nome + " - " + cpf); // junta nome e cpf
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return nomes;
+        return sugestoes;
     }
 
     @SuppressWarnings("unchecked")
@@ -174,7 +186,7 @@ public class RemoverFun extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Nome do usuário a demitir");
+        jLabel1.setText("CPF do paciente a excluir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,10 +196,10 @@ public class RemoverFun extends javax.swing.JInternalFrame {
                 .addGap(105, 105, 105)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(textFieldUsuarioDemitir, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(textFieldUsuarioDemitir, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(754, Short.MAX_VALUE))
+                .addContainerGap(694, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +209,7 @@ public class RemoverFun extends javax.swing.JInternalFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(13, 13, 13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldUsuarioDemitir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20))
         );
@@ -246,17 +258,17 @@ public class RemoverFun extends javax.swing.JInternalFrame {
 
             conn = myConnection.getConexao();
             if (conn == null || conn.isClosed()) {
-                JOptionPane.showInternalConfirmDialog(getDesktopPane(),"Impossivel estabelecer conexao...");
+                JOptionPane.showInternalConfirmDialog(getDesktopPane(), "Impossivel estabelecer conexao...");
             } else {
                 System.out.println("Conexao estabelecida com sucesso...");
             }
 
-            String nameConsulta = textFieldUsuarioDemitir.getText();
+            String cpfConsulta = textFieldUsuarioDemitir.getText();
 
             //DADOS PESSOAIS E OS IDs
-            String sqlFuncionarioDados = "SELECT * FROM paciente WHERE nome = ?";
+            String sqlFuncionarioDados = "SELECT * FROM paciente WHERE cpf = ?";
             ps = conn.prepareStatement(sqlFuncionarioDados);
-            ps.setString(1, nameConsulta);
+            ps.setString(1, cpfConsulta);
             rs = ps.executeQuery();
 
             int idEndereco = -1;

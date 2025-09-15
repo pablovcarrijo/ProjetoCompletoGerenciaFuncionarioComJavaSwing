@@ -8,7 +8,33 @@ package frames_consulta;
  *
  * @author PabloCarrijo
  */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import model.connector.myConnection;
+
 public class VisualizarConsulta extends javax.swing.JInternalFrame {
+
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
+
+    private DefaultListModel<String> listModel;
+    private JList<String> sugestaoList;
+    private JScrollPane scrollPane;
+    private JPopupMenu popupSugestoes;
+    private String cpfSelecionado;
 
     /**
      * Creates new form AddConsulta
@@ -17,6 +43,7 @@ public class VisualizarConsulta extends javax.swing.JInternalFrame {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        configurarAutoComplete();
     }
 
     /**
@@ -28,35 +55,261 @@ public class VisualizarConsulta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JPanel();
+        desktopPane2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        textFieldPaciente = new javax.swing.JTextField();
+        jButtonBuscar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableConsultas = new javax.swing.JTable();
 
-        javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
-        desktopPane.setLayout(desktopPaneLayout);
-        desktopPaneLayout.setHorizontalGroup(
-            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 959, Short.MAX_VALUE)
+        jLabel3.setText("CPF do paciente: ");
+
+        textFieldPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldPacienteActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
+        tableConsultas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Medico", "Especialidade", "Dia", "Horário"
+            }
+        ));
+        jScrollPane3.setViewportView(tableConsultas);
+
+        javax.swing.GroupLayout desktopPane2Layout = new javax.swing.GroupLayout(desktopPane2);
+        desktopPane2.setLayout(desktopPane2Layout);
+        desktopPane2Layout.setHorizontalGroup(
+            desktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPane2Layout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addGroup(desktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jLabel3)
+                    .addComponent(textFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
-        desktopPaneLayout.setVerticalGroup(
-            desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+        desktopPane2Layout.setVerticalGroup(
+            desktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPane2Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopPane2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(textFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonBuscar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(desktopPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(desktopPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void textFieldPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldPacienteActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        String nomePaciente = textFieldPaciente.getText().trim();
+        if (!nomePaciente.isEmpty()) {
+            buscarConsultasPaciente(nomePaciente);
+        } else {
+            JOptionPane.showMessageDialog(this, "Digite o nome do paciente.");
+        }    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    // ================================
+    //  Configuração do autocomplete
+    // ================================
+    private void configurarAutoComplete() {
+        listModel = new DefaultListModel<>();
+        sugestaoList = new JList<>(listModel);
+        scrollPane = new JScrollPane(sugestaoList);
+
+        popupSugestoes = new JPopupMenu();
+        popupSugestoes.setBorder(null);
+        popupSugestoes.add(scrollPane);
+        scrollPane.setPreferredSize(new java.awt.Dimension(
+                textFieldPaciente.getWidth(), 120
+        ));
+
+        // Listener para capturar digitação
+        textFieldPaciente.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                buscarSugestoes();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                buscarSugestoes();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                buscarSugestoes();
+            }
+
+            private void buscarSugestoes() {
+                String texto = textFieldPaciente.getText().trim();
+                if (texto.isEmpty()) {
+                    popupSugestoes.setVisible(false);
+                    return;
+                }
+
+                List<String> sugestoes = buscarNoBanco(texto);
+                atualizarSugestoes(sugestoes);
+            }
+        });
+
+        // Se clicar em uma sugestão
+        sugestaoList.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    String selecionado = sugestaoList.getSelectedValue();
+                    if (selecionado != null) {
+                        // Divide em nome e cpf
+                        String[] partes = selecionado.split(" - ");
+                        if (partes.length == 2) {
+                            textFieldPaciente.setText(partes[1]); // coloca só o CPF no campo
+                        } else {
+                            textFieldPaciente.setText(selecionado);
+                        }
+                        popupSugestoes.setVisible(false);
+                    }
+                }
+            }
+        });
+    }
+
+    private void atualizarSugestoes(List<String> sugestoes) {
+        listModel.clear();
+        if (!sugestoes.isEmpty()) {
+            for (String s : sugestoes) {
+                listModel.addElement(s);
+            }
+
+            int rowHeight = sugestaoList.getFixedCellHeight() > 0 ? sugestaoList.getFixedCellHeight() : 40;
+            int altura = Math.min(sugestoes.size() * rowHeight, 150);
+            scrollPane.setPreferredSize(new java.awt.Dimension(
+                    textFieldPaciente.getWidth(),
+                    altura
+            ));
+
+            popupSugestoes.show(textFieldPaciente, 0, textFieldPaciente.getHeight());
+            textFieldPaciente.requestFocusInWindow();
+        } else {
+            popupSugestoes.setVisible(false);
+        }
+    }
+
+    private List<String> buscarNoBanco(String texto) {
+        List<String> nomes = new ArrayList<>();
+        try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
+                "SELECT nome, cpf FROM paciente WHERE nome LIKE ? OR cpf LIKE ? LIMIT 10")) {
+
+            stmt.setString(1, texto + "%");  // pesquisa por nome
+            stmt.setString(2, texto + "%");  // pesquisa também por CPF
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                nomes.add(nome + " - " + cpf); // concatena nome + cpf
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            myConnection.closeConnection(conn, ps, rs);
+        }
+        return nomes;
+    }
+
+    // ================================
+    //  Buscar consultas do paciente
+    // ================================
+    private void buscarConsultasPaciente(String nomePaciente) {
+        try {
+            conn = myConnection.getConexao();
+            if (conn == null || conn.isClosed()) {
+                JOptionPane.showMessageDialog(this, "Impossível estabelecer conexão...");
+                return;
+            }
+
+            // Consulta para buscar todas as consultas do paciente
+            String sql = "SELECT "
+                    + "m.nome AS Medico, "
+                    + "e.especialidade AS Especialidade, "
+                    + "a.data_agenda AS Data_agenda, "
+                    + "a.hora_agenda AS Hora_agenda "
+                    + "FROM consulta c "
+                    + "INNER JOIN agenda a ON c.id_agenda = a.id_agenda "
+                    + "INNER JOIN medico m ON a.CRM = m.CRM "
+                    + "INNER JOIN especialidade e ON m.id_especialidade = e.id_especialidade "
+                    + "INNER JOIN paciente p ON c.id_paciente = p.id_paciente "
+                    + "WHERE p.cpf = ? "
+                    + "ORDER BY a.data_agenda, a.hora_agenda";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, nomePaciente);
+            rs = ps.executeQuery();
+
+            // Limpar tabela
+            DefaultTableModel model = (DefaultTableModel) tableConsultas.getModel();
+            model.setRowCount(0);
+
+            // Preencher tabela com os resultados
+            while (rs.next()) {
+                Object[] row = {
+                    rs.getString("Medico"),
+                    rs.getString("Especialidade"),
+                    rs.getString("Data_agenda"),
+                    rs.getString("Hora_agenda").substring(0, 5) // Formata para HH:mm
+                };
+                model.addRow(row);
+            }
+
+            if (model.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "Nenhuma consulta encontrada para este paciente.");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar consultas: " + e.getMessage());
+        } finally {
+            myConnection.closeConnection(conn, ps, rs);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel desktopPane;
+    private javax.swing.JPanel desktopPane2;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tableConsultas;
+    private javax.swing.JTextField textFieldPaciente;
     // End of variables declaration//GEN-END:variables
 }

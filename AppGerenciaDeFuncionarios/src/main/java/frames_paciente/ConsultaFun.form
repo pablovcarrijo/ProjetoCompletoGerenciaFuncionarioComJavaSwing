@@ -48,11 +48,11 @@
                   <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="textFieldConsultaFun" min="-2" pref="211" max="-2" attributes="0"/>
+                      <Component id="textFieldConsultaFun" min="-2" pref="281" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="buttonConsulta" min="-2" pref="150" max="-2" attributes="0"/>
-                  <EmptySpace pref="829" max="32767" attributes="0"/>
+                  <EmptySpace pref="771" max="32767" attributes="0"/>
               </Group>
               <Component id="desktopPaneConsulta" alignment="1" max="32767" attributes="0"/>
           </Group>
@@ -83,7 +83,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="33" red="33" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nome para consulta"/>
+            <Property name="text" type="java.lang.String" value="CPF para consulta"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JDesktopPane" name="desktopPaneConsulta">

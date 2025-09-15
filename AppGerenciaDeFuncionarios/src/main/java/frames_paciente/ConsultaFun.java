@@ -83,13 +83,21 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selecionado = sugestaoList.getSelectedValue();
-                    textFieldConsultaFun.setText(selecionado);
-                    popupSugestoes.setVisible(false);
+                    if (selecionado != null) {
+                        // Divide em nome e cpf
+                        String[] partes = selecionado.split(" - ");
+                        if (partes.length == 2) {
+                            textFieldConsultaFun.setText(partes[1]); // coloca só o CPF no campo
+                        } else {
+                            textFieldConsultaFun.setText(selecionado);
+                        }
+                        popupSugestoes.setVisible(false);
+                    }
                 }
             }
         });
     }
-    
+
     //  Atualiza o popup com as sugestões
     private void atualizarSugestoes(List<String> sugestoes) {
         listModel.clear();
@@ -117,19 +125,23 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
 
     //  Consulta no banco para autocomplete
     private List<String> buscarNoBanco(String texto) {
-        List<String> nomes = new ArrayList<>();
+        List<String> sugestoes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
+                "SELECT nome, cpf FROM paciente WHERE nome LIKE ? OR cpf LIKE ? LIMIT 10")) {
 
-            stmt.setString(1, texto + "%");
+            stmt.setString(1, texto + "%"); // busca por nome
+            stmt.setString(2, texto + "%"); // busca também por cpf
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
-                nomes.add(rs.getString("nome"));
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                sugestoes.add(nome + " - " + cpf); // junta nome e cpf
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return nomes;
+        return sugestoes;
     }
 
     @SuppressWarnings("unchecked")
@@ -147,7 +159,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Nome para consulta");
+        jLabel1.setText("CPF para consulta");
 
         javax.swing.GroupLayout desktopPaneConsultaLayout = new javax.swing.GroupLayout(desktopPaneConsulta);
         desktopPaneConsulta.setLayout(desktopPaneConsultaLayout);
@@ -177,10 +189,10 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
                 .addGap(110, 110, 110)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(textFieldConsultaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(textFieldConsultaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(buttonConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(829, Short.MAX_VALUE))
+                .addContainerGap(771, Short.MAX_VALUE))
             .addComponent(desktopPaneConsulta, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
@@ -231,7 +243,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
             String nameConsulta = textFieldConsultaFun.getText();
 
             //DADOS PESSOAIS E OS IDs
-            String sqlFuncionarioDados = "SELECT * FROM paciente WHERE nome = ?";
+            String sqlFuncionarioDados = "SELECT * FROM paciente WHERE cpf = ?";
             ps = conn.prepareStatement(sqlFuncionarioDados);
             ps.setString(1, nameConsulta);
             rs = ps.executeQuery();
@@ -300,7 +312,6 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_buttonConsultaActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

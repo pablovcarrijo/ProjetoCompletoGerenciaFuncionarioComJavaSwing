@@ -282,7 +282,7 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         labelCadastrar.setBackground(new java.awt.Color(51, 51, 51));
         labelCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         labelCadastrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelCadastrar.setText("Cadastrar funcionário");
+        labelCadastrar.setText("Cadastrar Paciente");
         labelCadastrar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         labelCadastrar.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -297,7 +297,7 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         labelConsultar.setBackground(new java.awt.Color(51, 51, 51));
         labelConsultar.setForeground(new java.awt.Color(255, 255, 255));
         labelConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelConsultar.setText("Consultar funcionário");
+        labelConsultar.setText("Consultar Paciente");
         labelConsultar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         labelConsultar.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -312,7 +312,7 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         labelAlterar.setBackground(new java.awt.Color(51, 51, 51));
         labelAlterar.setForeground(new java.awt.Color(255, 255, 255));
         labelAlterar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAlterar.setText("Alterar funcionário");
+        labelAlterar.setText("Alterar Paciente");
         labelAlterar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         labelAlterar.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -327,7 +327,7 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         labelRemover.setBackground(new java.awt.Color(51, 51, 51));
         labelRemover.setForeground(new java.awt.Color(255, 255, 255));
         labelRemover.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelRemover.setText("Remover funcionário");
+        labelRemover.setText("Remover Paciente");
         labelRemover.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
         labelRemover.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {

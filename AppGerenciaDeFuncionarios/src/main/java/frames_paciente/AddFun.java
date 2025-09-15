@@ -146,12 +146,14 @@ public class AddFun extends javax.swing.JInternalFrame {
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nome Paciente"));
         jPanel1.setAutoscrolls(true);
         jPanel1.setPreferredSize(new java.awt.Dimension(1099, 541));
 
         textFieldNomeFunc.setBackground(new java.awt.Color(255, 255, 255));
         textFieldNomeFunc.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldNomeFunc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do funcionário", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldNomeFunc.setForeground(new java.awt.Color(51, 51, 51));
+        textFieldNomeFunc.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome Paciente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNomeFunc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldNomeFuncFocusGained(evt);
@@ -165,7 +167,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldNomeCpf.setBackground(new java.awt.Color(255, 255, 255));
         textFieldNomeCpf.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldNomeCpf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldNomeCpf.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CPF", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNomeCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldNomeCpfFocusGained(evt);
@@ -179,7 +181,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldCEPFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldCEPFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldCEPFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CEP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldCEPFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CEP", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldCEPFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldCEPFunFocusGained(evt);
@@ -193,7 +195,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldBairroFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldBairroFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldBairroFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bairro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldBairroFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bairro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldBairroFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldBairroFunFocusGained(evt);
@@ -202,7 +204,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldNumeroFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldNumeroFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldNumeroFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldNumeroFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNumeroFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldNumeroFunFocusGained(evt);
@@ -211,7 +213,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldDataNascimento.setBackground(new java.awt.Color(255, 255, 255));
         textFieldDataNascimento.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldDataNascimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de nascimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldDataNascimento.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data de nascimento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldDataNascimento.setCaretColor(new java.awt.Color(255, 255, 255));
         textFieldDataNascimento.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         textFieldDataNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -228,7 +230,6 @@ public class AddFun extends javax.swing.JInternalFrame {
         comboBoxEstadoCivil.setBackground(new java.awt.Color(255, 255, 255));
         comboBoxEstadoCivil.setForeground(new java.awt.Color(51, 51, 51));
         comboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxEstadoCivil.setBorder(null);
         comboBoxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxEstadoCivilActionPerformed(evt);
@@ -237,7 +238,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldTelefoneFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldTelefoneFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldTelefoneFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefone", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldTelefoneFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Telefone", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldTelefoneFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldTelefoneFunFocusGained(evt);
@@ -246,7 +247,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldEmailFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldEmailFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldEmailFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldEmailFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldEmailFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldEmailFunFocusGained(evt);
@@ -256,7 +257,6 @@ public class AddFun extends javax.swing.JInternalFrame {
         comboBoxCargo.setBackground(new java.awt.Color(255, 255, 255));
         comboBoxCargo.setForeground(new java.awt.Color(51, 51, 51));
         comboBoxCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboBoxCargo.setBorder(null);
         comboBoxCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxCargoActionPerformed(evt);
@@ -265,7 +265,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldNomeBancoFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldNomeBancoFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldNomeBancoFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do banco", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldNomeBancoFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nome do banco", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldNomeBancoFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldNomeBancoFunFocusGained(evt);
@@ -274,7 +274,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldAgenciaFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldAgenciaFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldAgenciaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agência", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldAgenciaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Agência", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldAgenciaFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldAgenciaFunFocusGained(evt);
@@ -283,7 +283,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldSalarioFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldSalarioFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldSalarioFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldSalarioFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Salário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldSalarioFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldSalarioFunFocusGained(evt);
@@ -292,11 +292,11 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldComplementoFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldComplementoFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldComplementoFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Complemento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldComplementoFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Complemento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
 
         textFieldRuaFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldRuaFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldRuaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rua", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldRuaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rua", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldRuaFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldRuaFunFocusGained(evt);
@@ -305,7 +305,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFieldCidadeFun.setBackground(new java.awt.Color(255, 255, 255));
         textFieldCidadeFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFieldCidadeFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFieldCidadeFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
         textFieldCidadeFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldCidadeFunFocusGained(evt);
@@ -314,7 +314,7 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         cadastrarButtonFuncionario.setBackground(new java.awt.Color(51, 51, 51));
         cadastrarButtonFuncionario.setForeground(new java.awt.Color(255, 255, 255));
-        cadastrarButtonFuncionario.setText("Cadastrar funcionário");
+        cadastrarButtonFuncionario.setText("Cadastrar Paciente");
         cadastrarButtonFuncionario.setBorder(null);
         cadastrarButtonFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,12 +333,12 @@ public class AddFun extends javax.swing.JInternalFrame {
 
         textFiledNumeroContaFun.setBackground(new java.awt.Color(255, 255, 255));
         textFiledNumeroContaFun.setForeground(new java.awt.Color(51, 51, 51));
-        textFiledNumeroContaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número da conta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(102, 102, 102))); // NOI18N
+        textFiledNumeroContaFun.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Número da conta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(102, 102, 102))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText("Dados pessoas");
+        jLabel8.setText("Dados pessoais");
         jLabel8.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
@@ -383,7 +383,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1460, Short.MAX_VALUE)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -507,6 +507,8 @@ public class AddFun extends javax.swing.JInternalFrame {
                 .addGap(151, 151, 151))
         );
 
+        textFieldNomeFunc.getAccessibleContext().setAccessibleName("");
+
         jPanel3.add(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -519,7 +521,7 @@ public class AddFun extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
         );
 
         pack();
@@ -658,7 +660,7 @@ public class AddFun extends javax.swing.JInternalFrame {
             st.executeUpdate();
             st.close();
 
-            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Funcionario cadastrado com sucesso");
+            JOptionPane.showInternalMessageDialog(getDesktopPane(), "Paciente cadastrado com sucesso");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erro ao conectar..." + e.getMessage());
@@ -783,16 +785,16 @@ public class AddFun extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_textFieldNomeCpfFocusGained
 
-    private void textFieldNomeFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNomeFuncActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldNomeFuncActionPerformed
-
     //SUBTEXTO NAS TEXTFIELDS
     private void textFieldNomeFuncFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldNomeFuncFocusGained
         if (flagName == 0) {
             textFieldNomeFunc.setText("");
         }
     }//GEN-LAST:event_textFieldNomeFuncFocusGained
+
+    private void textFieldNomeFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNomeFuncActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldNomeFuncActionPerformed
 
     private void buscaCEP() {
         String logradouro = "";

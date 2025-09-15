@@ -124,7 +124,7 @@ public class AlterarFunContato extends javax.swing.JInternalFrame {
             }
 
             String sqlId = "SELECT id_paciente FROM paciente "
-                    + "WHERE nome = ?";
+                    + "WHERE cpf = ?";
 
             ps = conn.prepareStatement(sqlId);
             ps.setString(1, nameConsulta);

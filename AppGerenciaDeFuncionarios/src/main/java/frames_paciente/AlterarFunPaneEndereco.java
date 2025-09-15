@@ -178,7 +178,7 @@ public class AlterarFunPaneEndereco extends javax.swing.JInternalFrame {
                 JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao estabelecer conexão, mas foi reestabelecida");
             }
 
-            String sqlId = "SELECT id_endereco FROM paciente WHERE nome = ?";
+            String sqlId = "SELECT id_endereco FROM paciente WHERE cpf = ?";
             ps = conn.prepareStatement(sqlId);
             ps.setString(1, nameConsulta);
             rs = ps.executeQuery();

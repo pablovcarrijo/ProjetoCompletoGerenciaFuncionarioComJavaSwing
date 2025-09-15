@@ -8,11 +8,14 @@ frames_consulta\AddConsulta.class
 frames_consulta\AlterarConsultaHorario$4.class
 frames_paciente\PrincipalFramePaciente$10.class
 frames_paciente\PrincipalFramePaciente$8.class
+frames_consulta\VisualizarConsulta$1.class
 frames_consulta\RemoveConsulta.class
 frames_consulta\PrincipalFrameConsulta$1.class
+frames_consulta\VisualizarConsulta$4.class
 frames_consulta\AlterarConsulta$2.class
 frames_paciente\PrincipalFramePaciente$2.class
 frames_consulta\PrincipalFrameConsulta$10.class
+frames_consulta\VisualizarConsulta$2.class
 frames_consulta\PrincipalFrameConsulta$2.class
 frames_consulta\AlterarConsultaHorario$2.class
 frames_consulta\AlterarConsulta$1.class
@@ -20,6 +23,7 @@ initial_frames\InitialFrame$1.class
 frames_paciente\PrincipalFramePaciente$11.class
 model\entities\Contato.class
 frames_consulta\AlterarConsultaHorario$3.class
+frames_consulta\VisualizarConsulta$3.class
 model\entities\Endereco.class
 frames_consulta\AddConsulta$3.class
 frames_consulta\PrincipalFrameConsulta$3.class

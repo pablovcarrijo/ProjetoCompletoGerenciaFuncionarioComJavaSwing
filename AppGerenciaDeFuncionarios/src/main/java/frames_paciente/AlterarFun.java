@@ -95,11 +95,20 @@ public class AlterarFun extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selecionado = sugestaoList.getSelectedValue();
-                    textNamePesquisaAltera.setText(selecionado);
-                    popupSugestoes.setVisible(false);
+                    if (selecionado != null) {
+                        // Divide em nome e cpf
+                        String[] partes = selecionado.split(" - ");
+                        if (partes.length == 2) {
+                            textNamePesquisaAltera.setText(partes[1]); // coloca só o CPF no campo
+                        } else {
+                            textNamePesquisaAltera.setText(selecionado);
+                        }
+                        popupSugestoes.setVisible(false);
+                    }
                 }
             }
         });
+
     }
 
     //  Atualiza o popup com as sugestões
@@ -129,19 +138,23 @@ public class AlterarFun extends javax.swing.JInternalFrame {
 
     //  Consulta no banco para autocomplete
     private List<String> buscarNoBanco(String texto) {
-        List<String> nomes = new ArrayList<>();
+        List<String> sugestoes = new ArrayList<>();
         try (Connection conn = myConnection.getConexao(); PreparedStatement stmt = conn.prepareStatement(
-                "SELECT nome FROM paciente WHERE nome LIKE ? LIMIT 10")) {
+                "SELECT nome, cpf FROM paciente WHERE nome LIKE ? OR cpf LIKE ? LIMIT 10")) {
 
-            stmt.setString(1, texto + "%");
+            stmt.setString(1, texto + "%"); // busca por nome
+            stmt.setString(2, texto + "%"); // busca também por cpf
             ResultSet rs = stmt.executeQuery();
+
             while (rs.next()) {
-                nomes.add(rs.getString("nome"));
+                String nome = rs.getString("nome");
+                String cpf = rs.getString("cpf");
+                sugestoes.add(nome + " - " + cpf); // junta nome e cpf
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return nomes;
+        return sugestoes;
     }
 
     /**
@@ -172,7 +185,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Nome do funcionario");
+        jLabel1.setText("CPF do Paciente");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,23 +194,24 @@ public class AlterarFun extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textNamePesquisaAltera, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(30, 30, 30)
+                    .addComponent(jLabel1)
+                    .addComponent(textNamePesquisaAltera, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(736, Short.MAX_VALUE))
+                .addContainerGap(654, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textNamePesquisaAltera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(textNamePesquisaAltera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout desktopPaneAlterarLayout = new javax.swing.GroupLayout(desktopPaneAlterar);
@@ -252,7 +266,7 @@ public class AlterarFun extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT * FROM paciente WHERE nome = ?";
+            String sql = "SELECT * FROM paciente WHERE cpf = ?";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, textNamePesquisaAltera.getText());

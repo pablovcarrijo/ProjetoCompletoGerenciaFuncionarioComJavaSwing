@@ -29,17 +29,17 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private String nameConsulta;
+    private String cpfConsulta;
 
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
-    public AlterarFunPane(String nameConsulta) {
+    public AlterarFunPane(String cpfConsulta) {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        this.nameConsulta = nameConsulta;
+        this.cpfConsulta = cpfConsulta;
     }
 
     /**
@@ -147,7 +147,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        desktopPaneEndereco = new AlterarFunPaneEndereco(nameConsulta);
+        desktopPaneEndereco = new AlterarFunPaneEndereco(cpfConsulta);
         desktopPaneAlterar.add(desktopPaneEndereco);
         desktopPaneEndereco.setSize(desktopPaneAlterar.getSize());
         desktopPaneEndereco.setLocation(0, 0);
@@ -161,14 +161,14 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 conn = myConnection.getConexao();
             }
 
-            String sql = "SELECT f.nome, f.cpf, ed.cep, ed.cidade, ed.bairro, ed.numero, ed.complemento, ed.rua "
-                    + "FROM paciente f "
-                    + "JOIN endereco ed ON f.id_endereco = ed.id_endereco "
-                    + "WHERE f.nome = ?";
+            String sql = "SELECT p.nome, p.cpf, ed.cep, ed.cidade, ed.bairro, ed.numero, ed.complemento, ed.rua "
+                    + "FROM paciente p "
+                    + "JOIN endereco ed ON p.id_endereco = ed.id_endereco "
+                    + "WHERE p.cpf = ?";
 
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, nameConsulta);
+            ps.setString(1, cpfConsulta);
 
             rs = ps.executeQuery();
 
@@ -191,7 +191,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        desktopPaneDadosBancarios = new AlterarFunPaneDadosBancarios(nameConsulta);
+        desktopPaneDadosBancarios = new AlterarFunPaneDadosBancarios(cpfConsulta);
         desktopPaneAlterar.add(desktopPaneDadosBancarios);
         desktopPaneDadosBancarios.setSize(desktopPaneAlterar.getSize());
         desktopPaneDadosBancarios.setLocation(0, 0);
@@ -209,10 +209,10 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             String sql = "SELECT p.nome, p.cpf, db.agencia, db.nome_banco, db.salario, db.numero_conta "
                     + "FROM paciente p "
                     + "JOIN dados_bancarios db ON p.numero_conta_bancaria = db.numero_conta "
-                    + "WHERE p.nome = ?";
+                    + "WHERE p.cpf = ?";
 
             ps = conn.prepareStatement(sql);
-            ps.setString(1, nameConsulta);
+            ps.setString(1, cpfConsulta);
 
             rs = ps.executeQuery();
 
@@ -233,7 +233,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        desktopPaneDadosPesosas = new AlterarFunPaneDadosPessoais(nameConsulta);
+        desktopPaneDadosPesosas = new AlterarFunPaneDadosPessoais(cpfConsulta);
         desktopPaneAlterar.add(desktopPaneDadosPesosas);
         desktopPaneDadosPesosas.setSize(desktopPaneAlterar.getSize());
         desktopPaneDadosPesosas.setLocation(0, 0);
@@ -248,11 +248,11 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
                 JOptionPane.showInternalMessageDialog(getDesktopPane(), "Erro ao conectar");
             }
 
-            String sql = "SELECT * FROM paciente WHERE nome = ?";
+            String sql = "SELECT * FROM paciente WHERE cpf = ?";
 
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, nameConsulta);
+            ps.setString(1, cpfConsulta);
 
             rs = ps.executeQuery();
 
@@ -280,7 +280,7 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        desktopPaneContato = new AlterarFunContato(nameConsulta);
+        desktopPaneContato = new AlterarFunContato(cpfConsulta);
         desktopPaneAlterar.add(desktopPaneContato);
         desktopPaneContato.setSize(desktopPaneAlterar.getSize());
         desktopPaneContato.setLocation(0, 0);
@@ -297,11 +297,11 @@ public class AlterarFunPane extends javax.swing.JInternalFrame {
             String sql = "SELECT p.nome, p.cpf, ct.email, ct.telefone "
                     + "FROM paciente p "
                     + "JOIN contato ct ON p.id_paciente = ct.id_paciente "
-                    + "WHERE p.nome = ?";
+                    + "WHERE p.cpf = ?";
 
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, nameConsulta);
+            ps.setString(1, cpfConsulta);
 
             rs = ps.executeQuery();
 

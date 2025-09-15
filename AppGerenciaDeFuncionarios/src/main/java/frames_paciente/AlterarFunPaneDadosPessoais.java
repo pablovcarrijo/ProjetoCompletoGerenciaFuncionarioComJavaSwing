@@ -193,7 +193,7 @@ public class AlterarFunPaneDadosPessoais extends javax.swing.JInternalFrame {
             String sql = "UPDATE paciente SET "
                     + "nome = ?, cpf = ?, data_nascimento = ?, "
                     + "cargo = ?, estado_civil = ? "
-                    + "WHERE nome = ?";
+                    + "WHERE cpf = ?";
 
             ps = conn.prepareStatement(sql);
 
