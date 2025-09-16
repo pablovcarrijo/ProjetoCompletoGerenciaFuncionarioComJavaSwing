@@ -501,16 +501,22 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableHorarios = new javax.swing.JTable();
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Paciente");
 
         textFieldPaciente.setBackground(new java.awt.Color(102, 102, 102));
         textFieldPaciente.setForeground(new java.awt.Color(255, 255, 255));
         textFieldPaciente.setCaretColor(new java.awt.Color(255, 255, 255));
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Especialidade");
 
         comboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
+        medicosList.setForeground(new java.awt.Color(0, 0, 0));
         medicosList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Medicos" };
             public int getSize() { return strings.length; }
@@ -518,7 +524,7 @@ public class AlterarConsultaHorario extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(medicosList);
 
-        tableHorarios.setForeground(new java.awt.Color(51, 51, 51));
+        tableHorarios.setForeground(new java.awt.Color(0, 0, 0));
         tableHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"08:00", null, null, null, null, null},

@@ -45,18 +45,20 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         configurarAutoComplete();
 
-        carregarEspecialidades();
+        tableHorarios.setVisible(false);
+        jScrollPane2.setVisible(false);
 
         //Adicionando as especialidades e os médicos nos campos após selecionar
         comboBox1.addActionListener(e -> {
             String especialidadeSelecionada = (String) comboBox1.getSelectedItem();
             if (especialidadeSelecionada != null && !especialidadeSelecionada.equals("Selecione")) {
                 carregarMedicos(especialidadeSelecionada);
+
             } else {
-                DefaultListModel<String> vazio = new DefaultListModel<>();
-                medicosList.setModel(vazio);
+                medicosList.setModel(new DefaultListModel<>()); 
             }
         });
+        carregarEspecialidades();
 
         // duplo clique no médico -> carrega agenda
         medicosList.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -77,6 +79,10 @@ public class AddConsulta extends javax.swing.JInternalFrame {
 
                         if (rs.next()) {
                             crmAtual = rs.getInt("CRM");
+                            tableHorarios.setVisible(true);
+                            jScrollPane2.setVisible(true);
+                            desktopPane.revalidate();
+                            desktopPane.repaint();
                             mostrarAgendaMedico(crmAtual);
                         }
 
@@ -493,12 +499,18 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableHorarios = new javax.swing.JTable();
 
+        desktopPane.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nome ou cpf do paciente");
 
+        comboBox1.setForeground(new java.awt.Color(0, 0, 0));
         comboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
 
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Especialidade");
 
+        medicosList.setForeground(new java.awt.Color(0, 0, 0));
         medicosList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Médicos", " " };
             public int getSize() { return strings.length; }
@@ -506,7 +518,7 @@ public class AddConsulta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(medicosList);
 
-        tableHorarios.setForeground(new java.awt.Color(51, 51, 51));
+        tableHorarios.setForeground(new java.awt.Color(0, 0, 0));
         tableHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"08:00", null, null, null, null, null},

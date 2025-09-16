@@ -4,11 +4,7 @@
  */
 package frames_consulta;
 
-import frames_paciente.*;
-import frames_paciente.ConsultaFun;
-import frames_paciente.AddFun;
-import frames_paciente.AlterarFun;
-import frames_paciente.RemoverFun;
+import initial_frames.InitialFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
@@ -64,6 +60,18 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
         Color colorPink = new Color(255, 255, 255);
         Color colorBlack = new Color(51, 51, 51);
 
+        logoLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Fecha esta tela
+                dispose();
+
+                // Abre a tela inicial
+                InitialFrame initialFrame = new InitialFrame();
+                initialFrame.setVisible(true);
+            }
+        });
+
         labelCadastrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -76,7 +84,7 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
                     labelAlterar.setForeground(colorPink);
                     labelConsultar.setForeground(colorPink);
                     labelRemover.setForeground(colorPink);
-                    
+
                     labelCadastrar.setBackground(colorPink);
                     labelAlterar.setBackground(colorBlack);
                     labelConsultar.setBackground(colorBlack);
@@ -114,7 +122,7 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
                     labelCadastrar.setForeground(colorPink);
                     labelConsultar.setForeground(colorPink);
                     labelRemover.setForeground(colorPink);
-                    
+
                     labelAlterar.setBackground(colorPink);
                     labelCadastrar.setBackground(colorBlack);
                     labelConsultar.setBackground(colorBlack);
@@ -152,7 +160,7 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
                     labelAlterar.setForeground(colorPink);
                     labelCadastrar.setForeground(colorPink);
                     labelRemover.setForeground(colorPink);
-                    
+
                     labelConsultar.setBackground(colorPink);
                     labelAlterar.setBackground(colorBlack);
                     labelCadastrar.setBackground(colorBlack);
@@ -190,7 +198,7 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
                     labelConsultar.setForeground(colorPink);
                     labelAlterar.setForeground(colorPink);
                     labelCadastrar.setForeground(colorPink);
-                    
+
                     labelRemover.setBackground(colorPink);
                     labelConsultar.setBackground(colorBlack);
                     labelAlterar.setBackground(colorBlack);
@@ -232,7 +240,7 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        logoLabel = new javax.swing.JLabel();
         labelCadastrar = new javax.swing.JLabel();
         labelConsultar = new javax.swing.JLabel();
         labelAlterar = new javax.swing.JLabel();
@@ -243,15 +251,17 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 0, 0));
 
-        desktopPane.setBackground(java.awt.SystemColor.controlHighlight);
+        desktopPane.setBackground(new java.awt.Color(255, 255, 255));
         desktopPane.setForeground(new java.awt.Color(255, 255, 255));
         desktopPane.setPreferredSize(new java.awt.Dimension(1300, 541));
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logoGerencia2.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logo-sistema.jpg"))); // NOI18N
 
         desktopPane.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -259,15 +269,26 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1300, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 1300, Short.MAX_VALUE)
+            .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(desktopPaneLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 521, Short.MAX_VALUE)
+            .addGroup(desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(desktopPaneLayout.createSequentialGroup()
+                    .addGap(0, 64, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGap(0, 65, Short.MAX_VALUE)))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,9 +304,9 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logoGerencia2.jpg"))); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logoGerencia2menor.jpg"))); // NOI18N
+        logoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        logoLabel.setForeground(new java.awt.Color(255, 255, 255));
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logo-sistema-media.jpg"))); // NOI18N
 
         labelCadastrar.setBackground(new java.awt.Color(51, 51, 51));
         labelCadastrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -352,11 +373,11 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
+                .addContainerGap(429, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jLabel3)
+                .addComponent(logoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -365,30 +386,32 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
                 .addComponent(labelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(49, 49, 49)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3)))
+                        .addComponent(logoLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(labelConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelCadastrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, 0, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
+        jMenuBar1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuBar1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jMenuBar1AncestorAdded(evt);
@@ -429,9 +452,8 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
         );
 
         pack();
@@ -498,7 +520,6 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -508,5 +529,6 @@ public class PrincipalFrameConsulta extends javax.swing.JFrame {
     private javax.swing.JLabel labelCadastrar;
     private javax.swing.JLabel labelConsultar;
     private javax.swing.JLabel labelRemover;
+    private javax.swing.JLabel logoLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -161,16 +161,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("CPF para consulta");
 
-        javax.swing.GroupLayout desktopPaneConsultaLayout = new javax.swing.GroupLayout(desktopPaneConsulta);
-        desktopPaneConsulta.setLayout(desktopPaneConsultaLayout);
-        desktopPaneConsultaLayout.setHorizontalGroup(
-            desktopPaneConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        desktopPaneConsultaLayout.setVerticalGroup(
-            desktopPaneConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 431, Short.MAX_VALUE)
-        );
+        desktopPaneConsulta.setLayout(new javax.swing.BoxLayout(desktopPaneConsulta, javax.swing.BoxLayout.LINE_AXIS));
 
         buttonConsulta.setBackground(new java.awt.Color(51, 51, 51));
         buttonConsulta.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,23 +180,25 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
                 .addGap(110, 110, 110)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(textFieldConsultaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldConsultaFun, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(buttonConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(771, Short.MAX_VALUE))
+                .addComponent(buttonConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(805, Short.MAX_VALUE))
             .addComponent(desktopPaneConsulta, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel1)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textFieldConsultaFun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(buttonConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(buttonConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(desktopPaneConsulta))
         );
 
@@ -229,6 +222,8 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
         desktopPaneConsulta.add(consultaFunPane);
         consultaFunPane.setSize(desktopPaneConsulta.getSize());
         consultaFunPane.setLocation(0, 0);
+        consultaFunPane.setBounds(0, 0, desktopPaneConsulta.getWidth(), desktopPaneConsulta.getHeight());
+
         consultaFunPane.show();
 
         try {
