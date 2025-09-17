@@ -34,10 +34,10 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         setUndecorated(true);
 
         initComponents();
-
+        
         // Configura o JDesktopPane para preencher a tela inteira
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        desktopPane.setPreferredSize(screenSize);
+        desktopPane1.setPreferredSize(screenSize);
 
         // Aplica o modo de tela cheia
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -92,14 +92,14 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
                     labelRemover.setBackground(colorBlack);
                 }
                 AddFun fun = new AddFun();
-                desktopPane.add(fun);
+                desktopPane1.add(fun);
 
                 // 1. Dê à janela interna o tamanho do desktop pane primeiro.
-                Dimension desktopSize = desktopPane.getSize();
+                Dimension desktopSize = desktopPane1.getSize();
                 fun.setSize(desktopSize);
                 fun.setLocation(
-                        (desktopSize.width - desktopPane.getWidth()) / 2,
-                        (desktopSize.height - desktopPane.getHeight()) / 2
+                        (desktopSize.width - desktopPane1.getWidth()) / 2,
+                        (desktopSize.height - desktopPane1.getHeight()) / 2
                 );
                 fun.setVisible(true);
 
@@ -131,14 +131,14 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
                     labelRemover.setBackground(colorBlack);
                 }
                 AlterarFun fun = new AlterarFun();
-                desktopPane.add(fun);
+                desktopPane1.add(fun);
 
                 // 1. Dê à janela interna o tamanho do desktop pane primeiro.
-                Dimension desktopSize = desktopPane.getSize();
+                Dimension desktopSize = desktopPane1.getSize();
                 fun.setSize(desktopSize);
                 fun.setLocation(
-                        (desktopSize.width - desktopPane.getWidth()) / 2,
-                        (desktopSize.height - desktopPane.getHeight()) / 2
+                        (desktopSize.width - desktopPane1.getWidth()) / 2,
+                        (desktopSize.height - desktopPane1.getHeight()) / 2
                 );
                 fun.setVisible(true);
 
@@ -170,14 +170,14 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
                     labelRemover.setBackground(colorBlack);
                 }
                 ConsultaFun fun = new ConsultaFun();
-                desktopPane.add(fun);
+                desktopPane1.add(fun);
 
                 // 1. Dê à janela interna o tamanho do desktop pane primeiro.
-                Dimension desktopSize = desktopPane.getSize();
+                Dimension desktopSize = desktopPane1.getSize();
                 fun.setSize(desktopSize);
                 fun.setLocation(
-                        (desktopSize.width - desktopPane.getWidth()) / 2,
-                        (desktopSize.height - desktopPane.getHeight()) / 2
+                        (desktopSize.width - desktopPane1.getWidth()) / 2,
+                        (desktopSize.height - desktopPane1.getHeight()) / 2
                 );
                 fun.setVisible(true);
 
@@ -209,14 +209,14 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
                     labelCadastrar.setBackground(colorBlack);
                 }
                 RemoverFun fun = new RemoverFun();
-                desktopPane.add(fun);
+                desktopPane1.add(fun);
 
                 // 1. Dê à janela interna o tamanho do desktop pane primeiro.
-                Dimension desktopSize = desktopPane.getSize();
+                Dimension desktopSize = desktopPane1.getSize();
                 fun.setSize(desktopSize);
                 fun.setLocation(
-                        (desktopSize.width - desktopPane.getWidth()) / 2,
-                        (desktopSize.height - desktopPane.getHeight()) / 2
+                        (desktopSize.width - desktopPane1.getWidth()) / 2,
+                        (desktopSize.height - desktopPane1.getHeight()) / 2
                 );
                 fun.setVisible(true);
 
@@ -240,9 +240,6 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JDesktopPane();
-        desktopPane1 = new javax.swing.JDesktopPane();
-        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -251,52 +248,14 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         labelConsultar = new javax.swing.JLabel();
         labelAlterar = new javax.swing.JLabel();
         labelRemover = new javax.swing.JLabel();
+        desktopPane1 = new javax.swing.JDesktopPane();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         AddNovoFuncionario = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        desktopPane.setBackground(new java.awt.Color(255, 255, 255));
-        desktopPane.setForeground(new java.awt.Color(255, 255, 255));
-        desktopPane.setPreferredSize(new java.awt.Dimension(1300, 541));
-        desktopPane.setLayout(new java.awt.BorderLayout());
-
-        desktopPane1.setBackground(new java.awt.Color(255, 255, 255));
-        desktopPane1.setForeground(new java.awt.Color(255, 255, 255));
-        desktopPane1.setPreferredSize(new java.awt.Dimension(1300, 541));
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logo-sistema.jpg"))); // NOI18N
-
-        desktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout desktopPane1Layout = new javax.swing.GroupLayout(desktopPane1);
-        desktopPane1.setLayout(desktopPane1Layout);
-        desktopPane1Layout.setHorizontalGroup(
-            desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-            .addGroup(desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(desktopPane1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        desktopPane1Layout.setVerticalGroup(
-            desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
-            .addGroup(desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(desktopPane1Layout.createSequentialGroup()
-                    .addGap(0, 74, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addGap(0, 75, Short.MAX_VALUE)))
-        );
-
-        desktopPane.add(desktopPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(102, 102, 102)));
@@ -389,7 +348,7 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(logoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
                 .addComponent(labelCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -419,6 +378,39 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
                         .addGap(40, 40, 40)))
                 .addComponent(jLabel1, 0, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
+        );
+
+        desktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        desktopPane1.setForeground(new java.awt.Color(255, 255, 255));
+        desktopPane1.setPreferredSize(new java.awt.Dimension(1300, 541));
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/appGerenciaFuncionarios/imagens/logo-sistema.jpg"))); // NOI18N
+
+        desktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout desktopPane1Layout = new javax.swing.GroupLayout(desktopPane1);
+        desktopPane1.setLayout(desktopPane1Layout);
+        desktopPane1Layout.setHorizontalGroup(
+            desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1312, Short.MAX_VALUE)
+            .addGroup(desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(desktopPane1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        desktopPane1Layout.setVerticalGroup(
+            desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 521, Short.MAX_VALUE)
+            .addGroup(desktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(desktopPane1Layout.createSequentialGroup()
+                    .addGap(0, 64, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGap(0, 65, Short.MAX_VALUE)))
         );
 
         jMenuBar1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -454,16 +446,15 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(desktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1312, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(desktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
         );
 
         pack();
@@ -527,7 +518,6 @@ public class PrincipalFramePaciente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AddNovoFuncionario;
-    private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JDesktopPane desktopPane1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

@@ -173,7 +173,7 @@ public class RemoveConsulta extends javax.swing.JInternalFrame {
         if (!nomePaciente.isEmpty()) {
             buscarConsultasPaciente(nomePaciente);
         } else {
-            JOptionPane.showMessageDialog(desktopPane, "Digite o nome do paciente.");
+            JOptionPane.showInternalMessageDialog(desktopPane, "Digite o nome do paciente.");
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 

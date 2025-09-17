@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.DefaultDesktopManager;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import model.connector.myConnection;
@@ -29,6 +31,7 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         initComponents();
         this.setBorder(null);
         ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+
     }
 
     /**
@@ -40,7 +43,6 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         labelComplementoEnderecoInput = new javax.swing.JLabel();
@@ -82,12 +84,6 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel32 = new javax.swing.JLabel();
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Dados pessoais");
-        jLabel6.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         setBackground(new java.awt.Color(80, 80, 80));
 
@@ -321,7 +317,7 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelNumeroEnderecoInput)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                        .addGap(219, 219, 219)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -459,14 +455,13 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        int resp = JOptionPane.showInternalConfirmDialog(getDesktopPane(),
-                "Ceteza que deseja deseja excluir o funcionario?",
-                "Confirmação",
-                JOptionPane.YES_NO_OPTION);
+
+  
         
+        int confirmar = JOptionPane.showInternalConfirmDialog(this, "Deseja realmente excluir paciente?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
-        if (resp == 0) {
 
+        if (confirmar == 0) {
             try {
 
                 if (conn == null || conn.isClosed()) {
@@ -688,7 +683,6 @@ public class RemoveFunPane extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelAgenciaInput;

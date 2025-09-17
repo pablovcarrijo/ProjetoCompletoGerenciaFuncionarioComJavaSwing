@@ -92,6 +92,7 @@ public class VisualizarConsulta extends javax.swing.JInternalFrame {
                 "Medico", "Especialidade", "Dia", "Horário"
             }
         ));
+        tableConsultas.setEnabled(false);
         jScrollPane3.setViewportView(tableConsultas);
 
         javax.swing.GroupLayout desktopPane2Layout = new javax.swing.GroupLayout(desktopPane2);

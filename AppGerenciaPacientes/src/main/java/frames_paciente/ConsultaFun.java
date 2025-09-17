@@ -20,7 +20,7 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-    ConsultaFunPane consultaFunPane;
+    ConsultaFunPane consultaFunPane = null;
 
     // 🔹 Componentes para autocomplete
     private DefaultListModel<String> listModel;
@@ -218,6 +218,9 @@ public class ConsultaFun extends javax.swing.JInternalFrame {
 
     private void buttonConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConsultaActionPerformed
 
+        if(consultaFunPane != null){
+            consultaFunPane.dispose();
+        }
         consultaFunPane = new ConsultaFunPane();
         desktopPaneConsulta.add(consultaFunPane);
         consultaFunPane.setSize(desktopPaneConsulta.getSize());
